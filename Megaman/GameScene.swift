@@ -8,10 +8,23 @@
 
 import SpriteKit
 
+enum SwipeDirection : Int
+{
+    case Left
+    case Right
+    case Down
+    case Up
+}
+
 class GameScene : SKScene
-{    
+{
     var megaman = MegamanNode()
     var timeToCrossScreen = Float(3.0)
+    
+    var startTouchPosition : CGPoint = CGPointZero
+    
+    let HORIZ_SWIPE_DRAG_MIN : CGFloat = 12.0
+    let VERT_SWIPE_DRAG_MAX : CGFloat = 4.0
     
     override func didMoveToView( view: SKView )
     {
@@ -21,35 +34,140 @@ class GameScene : SKScene
         megaman.still()
     }
     
-    override func touchesBegan(touches: NSSet, withEvent event: UIEvent)
+    override func update(currentTime: CFTimeInterval)
+    {
+    }
+    
+    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!)
+    {
+        var touch = touches.anyObject() as UITouch
+        self.startTouchPosition = touch.locationInNode(self);
+    }
+    
+    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!)
     {
     }
     
     override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)
     {
-        var location = touches.anyObject().locationInNode(self)
-        var multiplierForDirection : CGFloat
-        
-        var megamanX = CGRectGetMidX(megaman.frame)
-        if( location.x <= megamanX )
+        // OBS: for-in statement is breaking XCode 6 Beta =S
+        var touchesArray : UITouch[] = touches.allObjects as UITouch[]
+        var nTouches = touchesArray.count
+        for( var i=0 ; i < nTouches ; ++i )
         {
-            // walk left
-            multiplierForDirection = -1
+            var touch = touchesArray[i]
+            if( touch.tapCount > 0 )
+            {
+                switch( touch.tapCount )
+                {
+                    case 1:
+                        handleSingleTap(touch)
+                    case 2:
+                        handleDoubleTap(touch)
+                    case 3:
+                        handleTripleTap(touch)
+                    default:
+                        return
+                }
+            }
+            else
+            {
+                var touch = touches.anyObject() as UITouch;
+                var currentTouchPosition = touch.locationInNode(self)
+                
+                var touchVector = Vector3D(x: currentTouchPosition.x - self.startTouchPosition.x, y: currentTouchPosition.y - self.startTouchPosition.y, z: 0.0 )
+                var horVector = Vector3D(x: 1.0, y: 0.0, z: 0.0)
+                var angle = horVector.angleBetween(touchVector)
+                
+                if( angle < 45 || angle > 135 )
+                {
+                    handleHorizontalSwipe( touch, direction: self.startTouchPosition.x < currentTouchPosition.x ? .Left : .Right )
+                }
+                else
+                {
+                    handleVerticalSwipe( touch, direction: self.startTouchPosition.y < currentTouchPosition.y ? .Down : .Up )
+                }
+                
+                self.startTouchPosition = CGPointZero;
+            }
         }
-        else
-        {
-            // walk right
-            multiplierForDirection = 1
-        }
-        
-        megaman.xScale = Float.abs(megaman.xScale) * multiplierForDirection
+    }
+    
+    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!)
+    {
+         self.startTouchPosition = CGPointZero;
+    }
+    
+    func handleSingleTap(touch: UITouch!)
+    {
+        megaman.shoot()
+    }
+    
+    func handleDoubleTap(touch: UITouch!)
+    {
+    }
+    
+    func handleTripleTap(touch: UITouch!)
+    {
+    }
+    
+    func handleHorizontalSwipe(touch: UITouch!, direction: SwipeDirection)
+    {
+        var location = touch.locationInNode(self)
+        megaman.faceLocation(location)
 
-        var duration = NSTimeInterval(( Float.abs( location.x - megamanX ) / self.frame.size.width ) * timeToCrossScreen)
-
+        var duration = NSTimeInterval(( Float.abs( location.x - megaman.position.x ) / self.frame.size.width ) * timeToCrossScreen)
         megaman.moveTo( CGPoint( x: location.x, y: megaman.position.y ), duration: duration )
     }
-   
-    override func update(currentTime: CFTimeInterval)
+    
+    func handleVerticalSwipe(touch: UITouch!, direction: SwipeDirection)
+    {
+    }
+    
+    func handlePanning(touch: UITouch!)
     {
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

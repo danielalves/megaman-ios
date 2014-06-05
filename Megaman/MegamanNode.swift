@@ -11,7 +11,6 @@ import SpriteKit
 enum MegamanState : Int
 {
     case Still = 0
-    case StartRunning
     case Running
 }
 
@@ -35,26 +34,26 @@ class MegamanNode : SKSpriteNode
         atlas = SKTextureAtlas(named: "megaman")
 
         stillFrames = [
-            atlas.textureNamed( "megaman-frame-00.png" ),
-            atlas.textureNamed( "megaman-frame-01.png" )
+            atlas.textureNamed( "megaman-00.png" ),
+            atlas.textureNamed( "megaman-01.png" )
         ]
         
         stillAnimation = SKAction.sequence([
-            SKAction.animateWithTextures( [atlas.textureNamed( "megaman-frame-00.png" )], timePerFrame: 3.0 ),
-            SKAction.animateWithTextures( [atlas.textureNamed( "megaman-frame-01.png" )], timePerFrame: 0.1 )
+            SKAction.animateWithTextures( [atlas.textureNamed( "megaman-00.png" )], timePerFrame: 3.0 ),
+            SKAction.animateWithTextures( [atlas.textureNamed( "megaman-01.png" )], timePerFrame: 0.1 )
         ])
 
         startRunningFrames = [
-            atlas.textureNamed( "megaman-frame-02.png" )
+            atlas.textureNamed( "megaman-02.png" )
         ]
         
         startRunningAnimation = SKAction.animateWithTextures( startRunningFrames, timePerFrame: 0.05 )
         
         runningFrames = [
-            atlas.textureNamed( "megaman-frame-03.png" ),
-            atlas.textureNamed( "megaman-frame-04.png" ),
-            atlas.textureNamed( "megaman-frame-05.png" ),
-            atlas.textureNamed( "megaman-frame-04.png" )
+            atlas.textureNamed( "megaman-03.png" ),
+            atlas.textureNamed( "megaman-04.png" ),
+            atlas.textureNamed( "megaman-05.png" ),
+            atlas.textureNamed( "megaman-04.png" )
         ]
 
         runningAnimation = SKAction.animateWithTextures( runningFrames, timePerFrame: 0.1 )
@@ -75,16 +74,113 @@ class MegamanNode : SKSpriteNode
     
     func still()
     {
-        state = .Still
-        self.runAction(SKAction.repeatActionForever(stillAnimation), withKey: "state")
+        setState( .Still )
     }
     
     func run()
     {
-        if( state != .Running )
+        setState( .Running )
+    }
+    
+    func shoot()
+    {}
+    
+    func faceLocation(location: CGPoint)
+    {
+        var multiplierForDirection : CGFloat
+        
+        var megamanX = CGRectGetMidX(self.frame)
+        if( location.x <= megamanX )
         {
-            state = .Running
-            self.runAction(SKAction.repeatActionForever(runningAnimation), withKey: "state")
+            // facing left
+            multiplierForDirection = -1
         }
+        else
+        {
+            // facing right
+            multiplierForDirection = 1
+        }
+        
+        self.xScale = Float.abs(self.xScale) * multiplierForDirection
+    }
+    
+    func setState(newState: MegamanState)
+    {
+        if( newState == state )
+        {
+            return
+        }
+        
+        let previousState = state;
+        state = newState
+        
+        var finalAction : SKAction
+        switch( state )
+        {
+            case .Still:
+                finalAction = SKAction.repeatActionForever(stillAnimation)
+
+            case .Running:
+                let running = SKAction.repeatActionForever(runningAnimation)
+                
+                if( previousState == .Still )
+                {
+                    finalAction = SKAction.sequence([ startRunningAnimation, running ])
+                }
+                else
+                {
+                    finalAction = running
+                }
+        }
+        
+        self.runAction(finalAction, withKey: "state")
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

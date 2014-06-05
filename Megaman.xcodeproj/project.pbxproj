@@ -17,10 +17,26 @@
 		1272832E193E492E008DD12B /* MegamanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1272832D193E492E008DD12B /* MegamanTests.swift */; };
 		12728338193E495D008DD12B /* megaman.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 12728337193E495D008DD12B /* megaman.atlas */; };
 		1272833A193E49CC008DD12B /* MegamanNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12728339193E49CC008DD12B /* MegamanNode.swift */; };
+		12D06CA5193FDDA9005C6BE8 /* Vector3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D06CA4193FDDA9005C6BE8 /* Vector3D.swift */; };
+		12D06CA8193FE2B8005C6BE8 /* NitroMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D06CA7193FE2B8005C6BE8 /* NitroMath.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		1236BC0F193E53FC0056612B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12728309193E492E008DD12B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 12728310193E492E008DD12B;
+			remoteInfo = Megaman;
+		};
+		124CE5D7193F6B5000D7277A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12728309193E492E008DD12B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 12728310193E492E008DD12B;
+			remoteInfo = Megaman;
+		};
+		124CE5D9193F6B5000D7277A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 12728309193E492E008DD12B /* Project object */;
 			proxyType = 1;
@@ -51,6 +67,8 @@
 		1272832D193E492E008DD12B /* MegamanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MegamanTests.swift; sourceTree = "<group>"; };
 		12728337193E495D008DD12B /* megaman.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = megaman.atlas; sourceTree = "<group>"; };
 		12728339193E49CC008DD12B /* MegamanNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MegamanNode.swift; sourceTree = "<group>"; };
+		12D06CA4193FDDA9005C6BE8 /* Vector3D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3D.swift; sourceTree = "<group>"; };
+		12D06CA7193FE2B8005C6BE8 /* NitroMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NitroMath.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +114,8 @@
 				1272831A193E492E008DD12B /* GameScene.swift */,
 				1272831C193E492E008DD12B /* GameViewController.swift */,
 				12728339193E49CC008DD12B /* MegamanNode.swift */,
+				12D06CA7193FE2B8005C6BE8 /* NitroMath.swift */,
+				12D06CA4193FDDA9005C6BE8 /* Vector3D.swift */,
 				124CE5D5193F5CA800D7277A /* SKNodeExtensions.swift */,
 				12728321193E492E008DD12B /* Images.xcassets */,
 				12728337193E495D008DD12B /* megaman.atlas */,
@@ -164,6 +184,8 @@
 			dependencies = (
 				12728329193E492E008DD12B /* PBXTargetDependency */,
 				1236BC10193E53FC0056612B /* PBXTargetDependency */,
+				124CE5D8193F6B5000D7277A /* PBXTargetDependency */,
+				124CE5DA193F6B5000D7277A /* PBXTargetDependency */,
 			);
 			name = MegamanTests;
 			productName = MegamanTests;
@@ -235,8 +257,10 @@
 			files = (
 				1272833A193E49CC008DD12B /* MegamanNode.swift in Sources */,
 				124CE5D6193F5CA800D7277A /* SKNodeExtensions.swift in Sources */,
+				12D06CA8193FE2B8005C6BE8 /* NitroMath.swift in Sources */,
 				1272831B193E492E008DD12B /* GameScene.swift in Sources */,
 				1272831D193E492E008DD12B /* GameViewController.swift in Sources */,
+				12D06CA5193FDDA9005C6BE8 /* Vector3D.swift in Sources */,
 				12728317193E492E008DD12B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -256,6 +280,16 @@
 			isa = PBXTargetDependency;
 			target = 12728310193E492E008DD12B /* Megaman */;
 			targetProxy = 1236BC0F193E53FC0056612B /* PBXContainerItemProxy */;
+		};
+		124CE5D8193F6B5000D7277A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 12728310193E492E008DD12B /* Megaman */;
+			targetProxy = 124CE5D7193F6B5000D7277A /* PBXContainerItemProxy */;
+		};
+		124CE5DA193F6B5000D7277A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 12728310193E492E008DD12B /* Megaman */;
+			targetProxy = 124CE5D9193F6B5000D7277A /* PBXContainerItemProxy */;
 		};
 		12728329193E492E008DD12B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -310,7 +344,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -346,7 +380,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -359,6 +393,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Megaman/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -370,6 +405,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Megaman/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
