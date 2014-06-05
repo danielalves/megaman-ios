@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Vector3D
+struct Vector3D
 {
     var x : CGFloat = 0.0
     var y : CGFloat = 0.0
@@ -58,21 +58,21 @@ class Vector3D
         return radiansToDegrees( acosf( normalized().dot( other.normalized() ) ) )
     }
     
-    func normalize() -> Vector3D
+    mutating func normalize() -> Vector3D
     {
         var m = module()
         if( fdif( m, 0.0 ) )
         {
-            x = x / m
-            y = y / m
-            z = z / m
+            x /= m
+            y /= m
+            z /= m
         }
         return self
     }
     
     func normalized() -> Vector3D
     {
-        let clone = Vector3D(other: self)
+        var clone = self
         return clone.normalize()
     }
 }
