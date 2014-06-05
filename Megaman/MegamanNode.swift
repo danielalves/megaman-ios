@@ -13,6 +13,7 @@ enum MegamanState : Int
     case Still = 0
     case Running
     case Jumping
+    case JumpingAndShooting
     case StillAndShooting
     case RunningAndShooting
 }
@@ -59,6 +60,12 @@ class MegamanNode : SKSpriteNode
             SKAction.animateWithTextures( [atlas.textureNamed( "megaman-00" )], timePerFrame: 3.0 ),
             SKAction.animateWithTextures( [atlas.textureNamed( "megaman-01" )], timePerFrame: 0.1 )
         ])
+        
+        jumpingFrames = [
+            atlas.textureNamed( "megaman-06" )
+        ]
+        
+        jumpingAnimation = SKAction.animateWithTextures( jumpingFrames, timePerFrame: 1.0 )
         
         stillAndShootingFrames = [
             atlas.textureNamed( "megaman-07" )
@@ -115,6 +122,23 @@ class MegamanNode : SKSpriteNode
     {
         setState( .Running )
     }
+    
+    func jump()
+    {
+        setState( .Jumping );
+        
+        let JUMP_HEIGHT : CGFloat = 100.0
+        let JUMP_DURATION : NSTimeInterval = 0.2
+        
+        let groundPosition : CGPoint = self.position
+        let airPosition = CGPoint( x: groundPosition.x, y: groundPosition.y + JUMP_HEIGHT)
+        
+        self.runAction(SKAction.moveTo( airPosition , duration: JUMP_DURATION ), withKey: "movement", optionalCompletion: {
+            self.runAction(SKAction.moveTo( groundPosition, duration: JUMP_DURATION ), withKey: "movement", optionalCompletion: {
+                self.still()
+            })
+        })
+    }
 
     func shoot()
     {
@@ -130,6 +154,9 @@ class MegamanNode : SKSpriteNode
             
             case .Running, .RunningAndShooting:
                 setState( .RunningAndShooting )
+            
+            case .Jumping, .JumpingAndShooting:
+                setState( .JumpingAndShooting )
         }
         
         var shot = Shot(onKillCallback: { self.liveShots -= 1 } )
@@ -207,7 +234,7 @@ class MegamanNode : SKSpriteNode
             case .Jumping:
                 finalAction = SKAction.repeatActionForever(jumpingAnimation)
             
-            case .StillAndShooting:
+            case .StillAndShooting, .JumpingAndShooting:
                 completion = { self.removeActionForKey("state"); self.still() }
                 finalAction = stillAndShootingAnimation
             
