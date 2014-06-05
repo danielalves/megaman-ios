@@ -85,7 +85,7 @@ class GameScene : SKScene
                 }
                 else
                 {
-                    handleVerticalSwipe( touch, direction: self.startTouchPosition.y < currentTouchPosition.y ? .Down : .Up )
+                    handleVerticalSwipe( touch, direction: self.startTouchPosition.y < currentTouchPosition.y ? .Up : .Down )
                 }
                 
                 self.startTouchPosition = CGPointZero;
@@ -122,6 +122,9 @@ class GameScene : SKScene
     
     func handleVerticalSwipe(touch: UITouch!, direction: SwipeDirection)
     {
+        if direction == .Up {
+            megaman.jump()
+        }
     }
     
     func handlePanning(touch: UITouch!)

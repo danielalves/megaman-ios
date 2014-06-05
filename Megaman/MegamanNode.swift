@@ -12,6 +12,7 @@ enum MegamanState : Int
 {
     case Still = 0
     case Running
+    case Jumping
 }
 
 class MegamanNode : SKSpriteNode
@@ -20,6 +21,9 @@ class MegamanNode : SKSpriteNode
     
     var stillFrames : SKTexture[]
     var stillAnimation : SKAction
+    
+    var jumpingFrames : SKTexture[]
+    var jumpingAnimation : SKAction
 
     var startRunningFrames : SKTexture[]
     var startRunningAnimation : SKAction
@@ -42,6 +46,12 @@ class MegamanNode : SKSpriteNode
             SKAction.animateWithTextures( [atlas.textureNamed( "megaman-00.png" )], timePerFrame: 3.0 ),
             SKAction.animateWithTextures( [atlas.textureNamed( "megaman-01.png" )], timePerFrame: 0.1 )
         ])
+        
+        jumpingFrames = [
+            atlas.textureNamed( "megaman-06.png" )
+        ]
+        
+        jumpingAnimation = SKAction.animateWithTextures( jumpingFrames, timePerFrame: 1.0)
 
         startRunningFrames = [
             atlas.textureNamed( "megaman-02.png" )
@@ -80,6 +90,29 @@ class MegamanNode : SKSpriteNode
     func run()
     {
         setState( .Running )
+    }
+    
+    func jump()
+    {
+        setState( .Jumping )
+        
+        let JUMP_HEIGHT : Float = 100.0
+        let JUMP_DURATION : NSTimeInterval = 0.1
+        
+        var currentPosition = self.position;
+        currentPosition.y = currentPosition.y + JUMP_HEIGHT
+        let airPosition = currentPosition;
+        
+        self.runAction(SKAction.moveTo( airPosition, duration: JUMP_DURATION ), withKey: "movement", completion: {
+            
+            var currentPosition = self.position;
+            currentPosition.y = currentPosition.y - JUMP_HEIGHT
+            let groundPosition = currentPosition;
+            
+            self.runAction(SKAction.moveTo( groundPosition, duration: JUMP_DURATION ), withKey: "movement", completion: {
+                self.still()
+            })
+        })
     }
     
     func shoot()
@@ -131,6 +164,8 @@ class MegamanNode : SKSpriteNode
                 {
                     finalAction = running
                 }
+            case .Jumping:
+                finalAction = SKAction.repeatActionForever(jumpingAnimation)
         }
         
         self.runAction(finalAction, withKey: "state")
