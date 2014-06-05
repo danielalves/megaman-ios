@@ -10,10 +10,17 @@ import SpriteKit
 
 extension SKNode
 {
-    func runAction( action: SKAction!, withKey: String!, completion: dispatch_block_t! )
+    func runAction( action: SKAction!, withKey: String!, optionalCompletion: dispatch_block_t? )
     {
-        var completionAction = SKAction.runBlock( completion )
-        var compositeAction = SKAction.sequence([ action, completionAction ])
-        self.runAction( compositeAction, withKey: withKey )
+        if let completion = optionalCompletion?
+        {
+            var completionAction = SKAction.runBlock( completion )
+            var compositeAction = SKAction.sequence([ action, completionAction ])
+            self.runAction( compositeAction, withKey: withKey )
+        }
+        else
+        {
+            self.runAction( action, withKey: withKey )
+        }
     }
 }

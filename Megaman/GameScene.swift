@@ -19,7 +19,6 @@ enum SwipeDirection : Int
 class GameScene : SKScene
 {
     var megaman = MegamanNode()
-    var timeToCrossScreen = Float(3.0)
     
     var startTouchPosition : CGPoint = CGPointZero
     
@@ -28,7 +27,7 @@ class GameScene : SKScene
     
     override func didMoveToView( view: SKView )
     {
-        self.addChild( megaman )        
+        self.addChild( megaman )
         
         megaman.position = CGPoint( x: self.frame.width / 2.0, y: self.frame.height / 2.0 )
         megaman.still()
@@ -41,7 +40,7 @@ class GameScene : SKScene
     override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!)
     {
         var touch = touches.anyObject() as UITouch
-        self.startTouchPosition = touch.locationInNode(self);
+        self.startTouchPosition = touch.locationInNode(self)
     }
     
     override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!)
@@ -67,12 +66,12 @@ class GameScene : SKScene
                     case 3:
                         handleTripleTap(touch)
                     default:
-                        return
+                        handleMultipleTap(touch, tapCount: touch.tapCount)
                 }
             }
             else
             {
-                var touch = touches.anyObject() as UITouch;
+                var touch = touches.anyObject() as UITouch
                 var currentTouchPosition = touch.locationInNode(self)
                 
                 var touchVector = Vector3D(x: currentTouchPosition.x - self.startTouchPosition.x, y: currentTouchPosition.y - self.startTouchPosition.y, z: 0.0 )
@@ -88,36 +87,48 @@ class GameScene : SKScene
                     handleVerticalSwipe( touch, direction: self.startTouchPosition.y < currentTouchPosition.y ? .Down : .Up )
                 }
                 
-                self.startTouchPosition = CGPointZero;
+                self.startTouchPosition = CGPointZero
             }
         }
     }
     
     override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!)
     {
-         self.startTouchPosition = CGPointZero;
+         self.startTouchPosition = CGPointZero
     }
     
     func handleSingleTap(touch: UITouch!)
     {
-        megaman.shoot()
+        handleShot(touch)
     }
     
     func handleDoubleTap(touch: UITouch!)
     {
+        handleShot(touch)
     }
     
     func handleTripleTap(touch: UITouch!)
     {
+        handleShot(touch)
+    }
+    
+    func handleMultipleTap(touch: UITouch, tapCount: Int)
+    {
+        handleShot(touch)
+    }
+    
+    func handleShot(touch: UITouch)
+    {
+        var location = touch.locationInNode(self)
+        megaman.faceLocation(location)
+        megaman.shoot()
     }
     
     func handleHorizontalSwipe(touch: UITouch!, direction: SwipeDirection)
     {
         var location = touch.locationInNode(self)
         megaman.faceLocation(location)
-
-        var duration = NSTimeInterval(( Float.abs( location.x - megaman.position.x ) / self.frame.size.width ) * timeToCrossScreen)
-        megaman.moveTo( CGPoint( x: location.x, y: megaman.position.y ), duration: duration )
+        megaman.moveTo( location )
     }
     
     func handleVerticalSwipe(touch: UITouch!, direction: SwipeDirection)
@@ -126,6 +137,7 @@ class GameScene : SKScene
     
     func handlePanning(touch: UITouch!)
     {
+        // TODO
     }
 }
 
