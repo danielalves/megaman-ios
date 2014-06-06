@@ -156,7 +156,7 @@ class MegamanNode : SKSpriteNode
     {
         var currentState = state
         
-        var changedFacingDirection = faceLocation(destination)
+        let changedFacingDirection = faceLocation(destination)
         if changedFacingDirection && ((currentState == .Running) || (currentState == .RunningAndShooting))
         {
             currentState = .Still
@@ -201,9 +201,9 @@ class MegamanNode : SKSpriteNode
     
     func faceLocation(location: CGPoint) -> Bool
     {
-        var multiplierForDirection : CGFloat
-        var wasFacingLeft = self.xScale < 0.0
+        let wasFacingLeft = xScale < 0.0
         
+        var multiplierForDirection : CGFloat
         if location.x <= position.x
         {
             // facing left
@@ -215,9 +215,9 @@ class MegamanNode : SKSpriteNode
             multiplierForDirection = 1.0
         }
         
-        self.xScale = CGFloat(CGFloat(fabsf(xScale)) * multiplierForDirection)
+        xScale = CGFloat(CGFloat(fabsf(xScale)) * multiplierForDirection)
         
-        return wasFacingLeft != ( self.xScale < 0.0 )
+        return wasFacingLeft != ( xScale < 0.0 )
     }
     
     func setState(newState: State)
