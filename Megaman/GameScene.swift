@@ -116,16 +116,12 @@ class GameScene : SKScene
     
     func handleShot(touch: UITouch)
     {
-        let location = touch.locationInNode(self)
-        megaman.faceLocation(location)
-        megaman.shoot()
+        megaman.shoot(touch.locationInNode(self))
     }
     
     func handleHorizontalSwipe(touch: UITouch!, direction: SwipeDirection)
     {
-        let location = touch.locationInNode(self)
-        megaman.faceLocation(location)
-        megaman.moveTo( location )
+        megaman.moveTo( touch.locationInNode(self) )
     }
     
     func handleVerticalSwipe(touch: UITouch!, direction: SwipeDirection)

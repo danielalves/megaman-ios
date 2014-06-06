@@ -11,7 +11,16 @@ import SpriteKit
 class MegamanNode : SKSpriteNode
 {
     let MAX_LIVE_SHOTS: Int = 3
-    let TIME_TO_CROSS_SCREEN = Float(3.0)
+    let TIME_TO_CROSS_SCREEN : CGFloat = 3.0
+    
+    // See megaman frames
+    let MEGA_BUSTER_CANNON_OFFSET_Y : CGFloat = 18.0
+    let MEGA_BUSTER_CANNON_HEIGHT : CGFloat = 2.0
+    let MEGA_BUSTER_INITIAL_DIST_FROM_SHOT : CGFloat = 10.0
+    
+    // Animation keys
+    let MOVEMENT_ANIM_KEY = "movement"
+    let STATE_ANIM_KEY = "state"
     
     enum State
     {
@@ -98,18 +107,20 @@ class MegamanNode : SKSpriteNode
         runningAndShootingAnimation = SKAction.animateWithTextures( runningAndShootingFrames, timePerFrame: 0.1 )
         
         let defaultFrame = stillFrames[0]
-        super.init( texture: defaultFrame, color: UIColor.whiteColor(), size: CGSize(width: 24, height: 24))
+        super.init( texture: defaultFrame, color: UIColor.whiteColor(), size: defaultFrame.size())
         
         setScale(4.0)
     }
 
     func moveTo( destination: CGPoint )
     {
-        let duration = NSTimeInterval(( Float.abs( destination.x - position.x ) / scene.size.width ) * TIME_TO_CROSS_SCREEN)
+         faceLocation(destination)
+        
+        let duration = NSTimeInterval(( fabsf( destination.x - position.x ) / scene.size.width ) * TIME_TO_CROSS_SCREEN)
         
         run()
         runAction(SKAction.moveTo( CGPoint( x: destination.x, y: position.y ), duration: duration ),
-                                   withKey: "movement",
+                                   withKey: MOVEMENT_ANIM_KEY,
                                    optionalCompletion: { self.still() })
     }
     
@@ -125,29 +136,38 @@ class MegamanNode : SKSpriteNode
     
     func jump()
     {
-        setState( .Jumping );
+        setState( .Jumping )
         
         let JUMP_HEIGHT : CGFloat = 100.0
         let JUMP_DURATION : NSTimeInterval = 0.2
         
-        let groundPosition : CGPoint = self.position
+        let groundPosition : CGPoint = position
         let airPosition = CGPoint( x: groundPosition.x, y: groundPosition.y + JUMP_HEIGHT)
         
-        self.runAction(SKAction.moveTo( airPosition , duration: JUMP_DURATION ), withKey: "movement", optionalCompletion: {
-            self.runAction(SKAction.moveTo( groundPosition, duration: JUMP_DURATION ), withKey: "movement", optionalCompletion: {
-                self.still()
-            })
-        })
+        runAction( SKAction.sequence([
+                       SKAction.moveTo( airPosition , duration: JUMP_DURATION ),
+                       SKAction.moveTo( groundPosition, duration: JUMP_DURATION )
+                   ]),
+                   withKey: MOVEMENT_ANIM_KEY,
+                   optionalCompletion: { self.still() })
     }
 
-    func shoot()
+    func shoot( destination: CGPoint)
     {
+        var currentState = state
+        
+        var changedFacingDirection = faceLocation(destination)
+        if changedFacingDirection && ((currentState == .Running) || (currentState == .RunningAndShooting))
+        {
+            currentState = .Still
+        }
+        
         if liveShots >= MAX_LIVE_SHOTS
         {
             return
         }
         
-        switch state
+        switch currentState
         {
             case .Still, .StillAndShooting:
                 setState( .StillAndShooting )
@@ -167,42 +187,37 @@ class MegamanNode : SKSpriteNode
         shot.yScale = yScale
         parent.addChild(shot)
         
-        shot.anchorPoint = CGPoint( x: 0.0, y: 1.0 )
-        shot.position.y = frame.origin.y + ( shot.size.height / 2.0 ) + ( 10.0 * yScale )
+        shot.position.y = ( position.y + size.height / 2.0 ) - ( MEGA_BUSTER_CANNON_OFFSET_Y * yScale ) - (( MEGA_BUSTER_CANNON_HEIGHT * yScale  ) / 2.0)
         
-        let megamanDxPerSec : CGFloat = scene.size.width / TIME_TO_CROSS_SCREEN
+        let megamanDxPerSec = scene.size.width / TIME_TO_CROSS_SCREEN
+        let shotOffset = ( size.width / 2.0 ) + ( shot.size.width / 2.0 ) + MEGA_BUSTER_INITIAL_DIST_FROM_SHOT
+        let facingDir : Shot.Direction = xScale < 0.0 ? .Left : .Right
         
-        if xScale < 0.0
-        {
-            shot.position.x = CGRectGetMinX( frame ) - ( shot.size.width / 2.0 ) - 10.0
-            shot.animate( .Left, ownerDxPerSec: megamanDxPerSec )
-        }
-        else
-        {
-            shot.position.x = CGRectGetMaxX( frame ) + ( shot.size.width / 2.0 ) + 10.0
-            shot.animate( .Right, ownerDxPerSec: megamanDxPerSec )
-        }
+        shot.position.x = position.x + ( CGFloat(facingDir.toRaw()) * shotOffset )
+        shot.animate( facingDir, ownerDxPerSec: megamanDxPerSec )
         
         ++liveShots
     }
     
-    func faceLocation(location: CGPoint)
+    func faceLocation(location: CGPoint) -> Bool
     {
         var multiplierForDirection : CGFloat
+        var wasFacingLeft = self.xScale < 0.0
         
-        let megamanX = CGRectGetMidX(frame)
-        if location.x <= megamanX
+        if location.x <= position.x
         {
             // facing left
-            multiplierForDirection = -1
+            multiplierForDirection = -1.0
         }
         else
         {
             // facing right
-            multiplierForDirection = 1
+            multiplierForDirection = 1.0
         }
         
-        xScale = Float.abs(xScale) * multiplierForDirection
+        self.xScale = CGFloat(CGFloat(fabsf(xScale)) * multiplierForDirection)
+        
+        return wasFacingLeft != ( self.xScale < 0.0 )
     }
     
     func setState(newState: State)
@@ -220,6 +235,7 @@ class MegamanNode : SKSpriteNode
         switch state
         {
             case .Still:
+                removeActionForKey(MOVEMENT_ANIM_KEY)
                 finalAction = stillAnimation.forever()
 
             case .Running:
@@ -237,21 +253,23 @@ class MegamanNode : SKSpriteNode
                 finalAction = jumpingAnimation.forever()
             
             case .StillAndShooting, .JumpingAndShooting:
+                removeActionForKey(MOVEMENT_ANIM_KEY)
+                
                 completion = {
-                    self.removeActionForKey("state")
+                    self.removeActionForKey(self.STATE_ANIM_KEY)
                     self.still()
                 }
                 finalAction = stillAndShootingAnimation
             
             case .RunningAndShooting:
                 completion = {
-                    self.removeActionForKey("state")
+                    self.removeActionForKey(self.STATE_ANIM_KEY)
                     self.run()
                 }
                 finalAction = runningAndShootingAnimation
         }
         
-        runAction(finalAction, withKey: "state", optionalCompletion: completion )
+        runAction(finalAction, withKey: STATE_ANIM_KEY, optionalCompletion: completion )
     }
 }
 
