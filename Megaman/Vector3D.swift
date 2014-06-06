@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Vector3D
+struct Vector3D : Printable
 {
     var x : CGFloat = 0.0
     var y : CGFloat = 0.0
@@ -90,6 +90,52 @@ struct Vector3D
     func toCGVector() -> CGVector
     {
         return CGVector( dx: x, dy: y )
+    }
+    
+    subscript(index: Int) -> CGFloat
+    {
+        get
+        {
+            assert( index >= 0 && index < 3, "index must be positive and less than 3" )
+            
+            switch index
+            {
+                case 0:
+                    return x
+                case 1:
+                    return y
+                case 2:
+                    return z
+                
+                // Will never run: assert is protecting us
+                default:
+                    return CGFloat.NaN;
+            }
+        }
+
+        set(newValue)
+        {
+            assert( index >= 0 && index < 3, "index must be positive and less than 3" )
+            
+            switch index
+            {
+                case 0:
+                    x = newValue
+                case 1:
+                    y = newValue
+                case 2:
+                    z = newValue
+                
+                // Will never run: assert is protecting us
+                default:
+                    return;
+            }
+        }
+    }
+    
+    var description: String
+    {
+        return "x: \(x), y: \(y), z: \(z)"
     }
 }
 
