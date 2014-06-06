@@ -12,15 +12,15 @@ extension SKNode
 {
     func runAction( action: SKAction!, withKey: String!, optionalCompletion: dispatch_block_t? )
     {
-        if let completion = optionalCompletion?
+        if let completion = optionalCompletion
         {
-            var completionAction = SKAction.runBlock( completion )
-            var compositeAction = SKAction.sequence([ action, completionAction ])
-            self.runAction( compositeAction, withKey: withKey )
+            let completionAction = SKAction.runBlock( completion )
+            let compositeAction = SKAction.sequence([ action, completionAction ])
+            runAction( compositeAction, withKey: withKey )
         }
         else
         {
-            self.runAction( action, withKey: withKey )
+            runAction( action, withKey: withKey )
         }
     }
 }

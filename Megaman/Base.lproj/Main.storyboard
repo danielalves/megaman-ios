@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LVB-YS-i5n">
     <dependencies>
-        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
@@ -17,137 +16,139 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <containerView appearanceType="aqua" opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZXr-8W-Ujh">
-                                <rect key="frame" x="0.0" y="380" width="480" height="100"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICh-N5-GNI" customClass="JoystickView" customModule="Megaman" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="381" width="480" height="99"/>
+                                <subviews>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUw-wp-4jR" userLabel="Right Button">
+                                        <rect key="frame" x="78" y="33" width="32" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="7VZ-BB-reP"/>
+                                            <constraint firstAttribute="width" constant="32" id="kpC-WO-nCQ"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow-right">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="directionButtonDidTap:" destination="ICh-N5-GNI" eventType="touchUpInside" id="0TE-k7-Nr2"/>
+                                        </connections>
+                                    </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5To-Qc-fgX">
+                                        <rect key="frame" x="436" y="19" width="32" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="11I-dd-PcU"/>
+                                            <constraint firstAttribute="width" constant="32" id="XUu-tn-Zu9"/>
+                                        </constraints>
+                                        <state key="normal" image="check">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="bButtonDidTap" destination="ICh-N5-GNI" eventType="touchUpInside" id="HGS-Ev-kXp"/>
+                                        </connections>
+                                    </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ab-fS-jim" userLabel="Up Button">
+                                        <rect key="frame" x="49" y="7" width="32" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="QiI-hf-cFG"/>
+                                            <constraint firstAttribute="height" constant="32" id="UaR-AC-F0R"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow-up">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="directionButtonDidTap:" destination="ICh-N5-GNI" eventType="touchUpInside" id="ZLF-HW-eZc"/>
+                                        </connections>
+                                    </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgw-sd-fgj">
+                                        <rect key="frame" x="381" y="49" width="32" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="EWa-pj-hCk"/>
+                                            <constraint firstAttribute="height" constant="32" id="HYo-52-Kvd"/>
+                                        </constraints>
+                                        <state key="normal" image="check">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="aButtonDidTap" destination="ICh-N5-GNI" eventType="touchUpInside" id="grH-1N-72u"/>
+                                        </connections>
+                                    </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3u-Ot-pYs" userLabel="Left Button">
+                                        <rect key="frame" x="20" y="34" width="32" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="32" id="kzY-v5-6c4"/>
+                                            <constraint firstAttribute="width" constant="32" id="tWm-nq-hg2"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow-left">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="directionButtonDidTap:" destination="ICh-N5-GNI" eventType="touchUpInside" id="NMC-9L-NyD"/>
+                                        </connections>
+                                    </button>
+                                    <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euQ-9h-Mh0" userLabel="Down Button">
+                                        <rect key="frame" x="49" y="64" width="32" height="32"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="32" id="feJ-F9-RF9"/>
+                                            <constraint firstAttribute="height" constant="32" id="yLr-R3-FGm"/>
+                                        </constraints>
+                                        <state key="normal" image="arrow-down">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="directionButtonDidTap:" destination="ICh-N5-GNI" eventType="touchUpInside" id="Fdi-dy-6RD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="Edm-1R-5a2"/>
+                                    <constraint firstItem="5To-Qc-fgX" firstAttribute="leading" secondItem="vgw-sd-fgj" secondAttribute="trailing" constant="23" id="4BA-bm-uXq"/>
+                                    <constraint firstAttribute="centerY" secondItem="W3u-Ot-pYs" secondAttribute="centerY" id="5mO-vJ-nTy"/>
+                                    <constraint firstItem="euQ-9h-Mh0" firstAttribute="top" secondItem="W3u-Ot-pYs" secondAttribute="bottom" constant="-2" id="Fsj-Jo-1CF"/>
+                                    <constraint firstAttribute="trailing" secondItem="5To-Qc-fgX" secondAttribute="trailing" constant="12" id="Ime-Tn-kHq"/>
+                                    <constraint firstItem="W3u-Ot-pYs" firstAttribute="top" secondItem="5Ab-fS-jim" secondAttribute="bottom" constant="-5" id="Mmk-B8-6Ud"/>
+                                    <constraint firstAttribute="centerY" secondItem="5To-Qc-fgX" secondAttribute="centerY" constant="15" id="MvO-fL-t33"/>
+                                    <constraint firstItem="W3u-Ot-pYs" firstAttribute="centerY" secondItem="CUw-wp-4jR" secondAttribute="centerY" constant="1" id="OuZ-O6-28c"/>
+                                    <constraint firstItem="CUw-wp-4jR" firstAttribute="leading" secondItem="euQ-9h-Mh0" secondAttribute="trailing" constant="-3" id="Sdj-tr-QtT"/>
+                                    <constraint firstItem="W3u-Ot-pYs" firstAttribute="leading" secondItem="ICh-N5-GNI" secondAttribute="leading" constant="20" id="Vmj-fe-iV1"/>
+                                    <constraint firstItem="5Ab-fS-jim" firstAttribute="leading" secondItem="W3u-Ot-pYs" secondAttribute="trailing" constant="-3" id="WUe-nI-1FS"/>
+                                    <constraint firstAttribute="height" constant="99" id="Xui-HD-vJO"/>
+                                    <constraint firstAttribute="centerY" secondItem="vgw-sd-fgj" secondAttribute="centerY" constant="-15" id="jul-qS-ar9"/>
+                                    <constraint firstItem="euQ-9h-Mh0" firstAttribute="leading" secondItem="W3u-Ot-pYs" secondAttribute="trailing" constant="-3" id="mwV-KG-QA0"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="gLG-rP-LgR" kind="embed" id="UWh-2l-k9G"/>
+                                    <outlet property="downDirectionButton" destination="euQ-9h-Mh0" id="6sz-tV-Ct2"/>
+                                    <outlet property="leftDirectionButton" destination="W3u-Ot-pYs" id="DDn-dH-4O6"/>
+                                    <outlet property="rightDirectionButton" destination="CUw-wp-4jR" id="Gdq-sk-MEU"/>
+                                    <outlet property="upDirectionButton" destination="5Ab-fS-jim" id="6hY-Hy-fnc"/>
                                 </connections>
-                            </containerView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ZXr-8W-Ujh" firstAttribute="leading" secondItem="bdc-N1-crn" secondAttribute="leading" id="92P-Zy-jzs"/>
-                            <constraint firstItem="b3d-qh-BLL" firstAttribute="top" secondItem="ZXr-8W-Ujh" secondAttribute="bottom" id="R7B-en-tSr"/>
-                            <constraint firstAttribute="trailing" secondItem="ZXr-8W-Ujh" secondAttribute="trailing" id="cZF-y2-Ee2"/>
+                            <constraint firstItem="ICh-N5-GNI" firstAttribute="leading" secondItem="bdc-N1-crn" secondAttribute="leading" id="2Zn-vg-dTN"/>
+                            <constraint firstItem="b3d-qh-BLL" firstAttribute="top" secondItem="ICh-N5-GNI" secondAttribute="bottom" id="lja-R7-sQN"/>
+                            <constraint firstAttribute="trailing" secondItem="ICh-N5-GNI" secondAttribute="trailing" id="tFE-D3-BPW"/>
                         </constraints>
                         <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
                     </view>
+                    <connections>
+                        <outlet property="joystickView" destination="ICh-N5-GNI" id="zUv-3I-bRv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="btX-cZ-eVz" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="221" y="623"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="D69-8o-ia2">
-            <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="gLG-rP-LgR" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="lae-iQ-fZP"/>
-                        <viewControllerLayoutGuide type="bottom" id="M5k-mY-vRF"/>
-                    </layoutGuides>
-                    <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lau-Ks-paa">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="100"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W3u-Ot-pYs">
-                                <rect key="frame" x="12" y="34" width="32" height="32"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="kzY-v5-6c4"/>
-                                    <constraint firstAttribute="width" constant="32" id="tWm-nq-hg2"/>
-                                </constraints>
-                                <state key="normal" image="arrow-left">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="euQ-9h-Mh0">
-                                <rect key="frame" x="41" y="64" width="32" height="32"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="feJ-F9-RF9"/>
-                                    <constraint firstAttribute="height" constant="32" id="yLr-R3-FGm"/>
-                                </constraints>
-                                <state key="normal" image="arrow-down">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUw-wp-4jR">
-                                <rect key="frame" x="70" y="33" width="32" height="32"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="7VZ-BB-reP"/>
-                                    <constraint firstAttribute="width" constant="32" id="kpC-WO-nCQ"/>
-                                </constraints>
-                                <state key="normal" image="arrow-right">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ab-fS-jim">
-                                <rect key="frame" x="41" y="7" width="32" height="32"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="QiI-hf-cFG"/>
-                                    <constraint firstAttribute="height" constant="32" id="UaR-AC-F0R"/>
-                                </constraints>
-                                <state key="normal" image="arrow-up">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5To-Qc-fgX">
-                                <rect key="frame" x="428" y="24" width="32" height="32"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="11I-dd-PcU"/>
-                                    <constraint firstAttribute="width" constant="32" id="XUu-tn-Zu9"/>
-                                </constraints>
-                                <state key="normal" image="check">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgw-sd-fgj">
-                                <rect key="frame" x="373" y="44" width="32" height="32"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="32" id="EWa-pj-hCk"/>
-                                    <constraint firstAttribute="height" constant="32" id="HYo-52-Kvd"/>
-                                </constraints>
-                                <state key="normal" image="check">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="5To-Qc-fgX" firstAttribute="leading" secondItem="vgw-sd-fgj" secondAttribute="trailing" constant="23" id="0WF-Ar-SIL"/>
-                            <constraint firstItem="W3u-Ot-pYs" firstAttribute="top" secondItem="5Ab-fS-jim" secondAttribute="bottom" constant="-5" id="7H3-tN-9Sb"/>
-                            <constraint firstItem="euQ-9h-Mh0" firstAttribute="top" secondItem="W3u-Ot-pYs" secondAttribute="bottom" constant="-2" id="Cqr-i0-TsI"/>
-                            <constraint firstAttribute="centerY" secondItem="vgw-sd-fgj" secondAttribute="centerY" constant="-10" id="J0l-dh-12c"/>
-                            <constraint firstAttribute="centerY" secondItem="W3u-Ot-pYs" secondAttribute="centerY" id="NOt-Iw-EhF"/>
-                            <constraint firstItem="W3u-Ot-pYs" firstAttribute="leading" secondItem="lau-Ks-paa" secondAttribute="leading" constant="12" id="QjW-25-j5L"/>
-                            <constraint firstAttribute="trailing" secondItem="5To-Qc-fgX" secondAttribute="trailing" constant="20" id="Ule-IS-TpC"/>
-                            <constraint firstItem="W3u-Ot-pYs" firstAttribute="centerY" secondItem="CUw-wp-4jR" secondAttribute="centerY" constant="1" id="hLc-JB-9jz"/>
-                            <constraint firstItem="euQ-9h-Mh0" firstAttribute="leading" secondItem="W3u-Ot-pYs" secondAttribute="trailing" constant="-3" id="oFl-8g-O50"/>
-                            <constraint firstItem="CUw-wp-4jR" firstAttribute="leading" secondItem="euQ-9h-Mh0" secondAttribute="trailing" constant="-3" id="vL1-Uy-FzO"/>
-                            <constraint firstItem="5Ab-fS-jim" firstAttribute="centerX" secondItem="euQ-9h-Mh0" secondAttribute="centerX" id="x9y-jl-TjU"/>
-                            <constraint firstAttribute="centerY" secondItem="5To-Qc-fgX" secondAttribute="centerY" constant="10" id="zBL-eg-kWJ"/>
-                        </constraints>
-                        <simulatedOrientationMetrics key="simulatedOrientationMetrics" orientation="landscapeRight"/>
-                    </view>
-                    <toolbarItems/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jqR-RY-uea" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="779" y="623"/>
         </scene>
     </scenes>
     <resources>

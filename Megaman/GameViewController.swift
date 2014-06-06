@@ -15,10 +15,10 @@ extension SKNode
     {
         let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks")
         
-        var sceneData = NSData.dataWithContentsOfFile(path, options: .DataReadingMappedIfSafe, error: nil)
-        var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
+        let sceneData = NSData.dataWithContentsOfFile(path, options: .DataReadingMappedIfSafe, error: nil)
+        let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
         
-        archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
+        archiver.setClass(classForKeyedUnarchiver(), forClassName: "SKScene")
         let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as GameScene
         archiver.finishDecoding()
         return scene
@@ -27,21 +27,26 @@ extension SKNode
 
 class GameViewController: UIViewController
 {
+    
+    @IBOutlet var joystickView : JoystickView
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
-
+        
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene
         {
-            let skView = self.view as SKView
-            skView.showsFPS = true
-            skView.showsNodeCount = true
+            let skView = view as SKView
+            skView.showsFPS = false
+            skView.showsNodeCount = false
             
             // Sprite Kit applies additional optimizations to improve rendering performance
             skView.ignoresSiblingOrder = true
             
             // Set the scale mode to scale to fit the window
             scene.scaleMode = .AspectFill
+            
+            joystickView.delegate = scene
             
             skView.presentScene(scene)
         }
@@ -55,13 +60,5 @@ class GameViewController: UIViewController
     override func supportedInterfaceOrientations() -> Int
     {
         return Int(UIInterfaceOrientationMask.Landscape.toRaw())
-    }
-
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-        
-        // Release any cached data, images, etc that aren't in use.
-        // ...
     }
 }

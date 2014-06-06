@@ -21,6 +21,7 @@
 		1272833A193E49CC008DD12B /* MegamanNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12728339193E49CC008DD12B /* MegamanNode.swift */; };
 		12D06CA5193FDDA9005C6BE8 /* Vector3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D06CA4193FDDA9005C6BE8 /* Vector3D.swift */; };
 		12D06CA8193FE2B8005C6BE8 /* NitroMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D06CA7193FE2B8005C6BE8 /* NitroMath.swift */; };
+		1578A1CB19420EEC00C3853A /* JoystickView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1578A1CA19420EEC00C3853A /* JoystickView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		12728339193E49CC008DD12B /* MegamanNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MegamanNode.swift; sourceTree = "<group>"; };
 		12D06CA4193FDDA9005C6BE8 /* Vector3D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3D.swift; sourceTree = "<group>"; };
 		12D06CA7193FE2B8005C6BE8 /* NitroMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NitroMath.swift; sourceTree = "<group>"; };
+		1578A1CA19420EEC00C3853A /* JoystickView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JoystickView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +119,7 @@
 				12728316193E492E008DD12B /* AppDelegate.swift */,
 				1272831A193E492E008DD12B /* GameScene.swift */,
 				1272831C193E492E008DD12B /* GameViewController.swift */,
+				1578A1CA19420EEC00C3853A /* JoystickView.swift */,
 				12728339193E49CC008DD12B /* MegamanNode.swift */,
 				123E42C11940D85D00548C0E /* Shot.swift */,
 				12D06CA7193FE2B8005C6BE8 /* NitroMath.swift */,
@@ -265,6 +268,7 @@
 				124CE5D6193F5CA800D7277A /* SKNodeExtensions.swift in Sources */,
 				12D06CA8193FE2B8005C6BE8 /* NitroMath.swift in Sources */,
 				1272831B193E492E008DD12B /* GameScene.swift in Sources */,
+				1578A1CB19420EEC00C3853A /* JoystickView.swift in Sources */,
 				1272831D193E492E008DD12B /* GameViewController.swift in Sources */,
 				12D06CA5193FDDA9005C6BE8 /* Vector3D.swift in Sources */,
 				123E42C21940D85D00548C0E /* Shot.swift in Sources */,
