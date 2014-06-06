@@ -8,17 +8,17 @@
 
 import SpriteKit
 
-enum ShotDirection : Int
-{
-    case Left = -1
-    case Right = 1
-}
-
 class Shot : SKSpriteNode
 {
-    var onKillCallback: () -> Void
+    enum Direction : Int
+    {
+        case Left = -1
+        case Right = 1
+    }
     
-    init(onKillCallback: () -> Void)
+    var onKillCallback: (Shot) -> Void
+    
+    init(onKillCallback: (Shot) -> Void)
     {
         self.onKillCallback = onKillCallback
         
@@ -26,20 +26,21 @@ class Shot : SKSpriteNode
         super.init(texture: tex, color: UIColor.whiteColor(), size: tex.size())
     }
     
-    override func removeFromParent() -> Void
+    override func removeFromParent()
     {
-        onKillCallback()
+        onKillCallback( self )
         super.removeFromParent()
     }
     
-    func animate(direction: ShotDirection, ownerDxPerSec: CGFloat)
+    func animate(direction: Direction, ownerDxPerSec: CGFloat)
     {
         let updateInterval: NSTimeInterval = 0.05
-        var dx = CGFloat( CGFloat(direction.toRaw()) * ( 20.0 + ( ownerDxPerSec * CGFloat(updateInterval) )))
+        let dx = CGFloat( CGFloat(direction.toRaw()) * ( 20.0 + ( ownerDxPerSec * CGFloat(updateInterval) )))
         
-        var movementAction = SKAction.moveBy(CGVector( dx, 0.0 ),
+        let movementAction = SKAction.moveBy(CGVector( dx, 0.0 ),
                                              duration: updateInterval )
-        var checkEndedAction = SKAction.runBlock({
+        
+        let checkEndedAction = SKAction.runBlock({
             if( !self.scene.intersectsNode( self ) )
             {
                 self.removeAllActions()
@@ -47,6 +48,6 @@ class Shot : SKSpriteNode
             }
         })
         
-        self.runAction( SKAction.sequence([ movementAction, checkEndedAction ]).forever() )
+        runAction( SKAction.sequence([ movementAction, checkEndedAction ]).forever() )
     }
 }

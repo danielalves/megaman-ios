@@ -15,10 +15,10 @@ extension SKNode
     {
         let path = NSBundle.mainBundle().pathForResource(file, ofType: "sks")
         
-        var sceneData = NSData.dataWithContentsOfFile(path, options: .DataReadingMappedIfSafe, error: nil)
-        var archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
+        let sceneData = NSData.dataWithContentsOfFile(path, options: .DataReadingMappedIfSafe, error: nil)
+        let archiver = NSKeyedUnarchiver(forReadingWithData: sceneData)
         
-        archiver.setClass(self.classForKeyedUnarchiver(), forClassName: "SKScene")
+        archiver.setClass(classForKeyedUnarchiver(), forClassName: "SKScene")
         let scene = archiver.decodeObjectForKey(NSKeyedArchiveRootObjectKey) as GameScene
         archiver.finishDecoding()
         return scene
@@ -33,7 +33,7 @@ class GameViewController: UIViewController
 
         if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene
         {
-            let skView = self.view as SKView
+            let skView = view as SKView
             skView.showsFPS = true
             skView.showsNodeCount = true
             
@@ -55,13 +55,5 @@ class GameViewController: UIViewController
     override func supportedInterfaceOrientations() -> Int
     {
         return Int(UIInterfaceOrientationMask.Landscape.toRaw())
-    }
-
-    override func didReceiveMemoryWarning()
-    {
-        super.didReceiveMemoryWarning()
-        
-        // Release any cached data, images, etc that aren't in use.
-        // ...
     }
 }

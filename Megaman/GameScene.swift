@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-enum SwipeDirection : Int
+enum SwipeDirection
 {
     case Left
     case Right
@@ -18,18 +18,18 @@ enum SwipeDirection : Int
 
 class GameScene : SKScene
 {
-    var megaman = MegamanNode()
-    
-    var startTouchPosition : CGPoint = CGPointZero
-    
     let HORIZ_SWIPE_DRAG_MIN : CGFloat = 12.0
     let VERT_SWIPE_DRAG_MAX : CGFloat = 4.0
     
+    let megaman = MegamanNode()
+    
+    var startTouchPosition : CGPoint = CGPointZero
+    
     override func didMoveToView( view: SKView )
     {
-        self.addChild( megaman )
+        addChild( megaman )
         
-        megaman.position = CGPoint( x: self.frame.width / 2.0, y: self.frame.height / 2.0 )
+        megaman.position = CGPoint( x: frame.width / 2.0, y: frame.height / 2.0 )
         megaman.still()
     }
     
@@ -39,8 +39,8 @@ class GameScene : SKScene
     
     override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!)
     {
-        var touch = touches.anyObject() as UITouch
-        self.startTouchPosition = touch.locationInNode(self)
+        let touch = touches.anyObject() as UITouch
+        startTouchPosition = touch.locationInNode(self)
     }
     
     override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!)
@@ -49,15 +49,11 @@ class GameScene : SKScene
     
     override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)
     {
-        // OBS: for-in statement is breaking XCode 6 Beta =S
-        var touchesArray : UITouch[] = touches.allObjects as UITouch[]
-        var nTouches = touchesArray.count
-        for( var i=0 ; i < nTouches ; ++i )
+        for touch in ( touches.allObjects as UITouch[] )
         {
-            var touch = touchesArray[i]
-            if( touch.tapCount > 0 )
+            if touch.tapCount > 0
             {
-                switch( touch.tapCount )
+                switch touch.tapCount
                 {
                     case 1:
                         handleSingleTap(touch)
@@ -71,30 +67,31 @@ class GameScene : SKScene
             }
             else
             {
-                var touch = touches.anyObject() as UITouch
-                var currentTouchPosition = touch.locationInNode(self)
+                // TODO : Differentiate between swipe and panning
                 
-                var touchVector = Vector3D(x: currentTouchPosition.x - self.startTouchPosition.x, y: currentTouchPosition.y - self.startTouchPosition.y, z: 0.0 )
-                var horVector = Vector3D(x: 1.0, y: 0.0, z: 0.0)
-                var angle = horVector.angleBetween(touchVector)
+                let currentTouchPosition = touch.locationInNode(self)
                 
-                if( angle < 45 || angle > 135 )
+                let touchVector = Vector3D(x: currentTouchPosition.x - startTouchPosition.x, y: currentTouchPosition.y - startTouchPosition.y, z: 0.0 )
+                let horVector = Vector3D(x: 1.0, y: 0.0, z: 0.0)
+                let angle = horVector.angleBetween(touchVector)
+                
+                if ( angle < 45 ) || ( angle > 135 )
                 {
-                    handleHorizontalSwipe( touch, direction: self.startTouchPosition.x < currentTouchPosition.x ? .Left : .Right )
+                    handleHorizontalSwipe( touch, direction: startTouchPosition.x < currentTouchPosition.x ? .Left : .Right )
                 }
                 else
                 {
-                    handleVerticalSwipe( touch, direction: self.startTouchPosition.y < currentTouchPosition.y ? .Down : .Up )
+                    handleVerticalSwipe( touch, direction: startTouchPosition.y < currentTouchPosition.y ? .Down : .Up )
                 }
                 
-                self.startTouchPosition = CGPointZero
+                startTouchPosition = CGPointZero
             }
         }
     }
     
     override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!)
     {
-         self.startTouchPosition = CGPointZero
+         startTouchPosition = CGPointZero
     }
     
     func handleSingleTap(touch: UITouch!)
@@ -119,14 +116,14 @@ class GameScene : SKScene
     
     func handleShot(touch: UITouch)
     {
-        var location = touch.locationInNode(self)
+        let location = touch.locationInNode(self)
         megaman.faceLocation(location)
         megaman.shoot()
     }
     
     func handleHorizontalSwipe(touch: UITouch!, direction: SwipeDirection)
     {
-        var location = touch.locationInNode(self)
+        let location = touch.locationInNode(self)
         megaman.faceLocation(location)
         megaman.moveTo( location )
     }
@@ -137,7 +134,6 @@ class GameScene : SKScene
     
     func handlePanning(touch: UITouch!)
     {
-        // TODO
     }
 }
 
