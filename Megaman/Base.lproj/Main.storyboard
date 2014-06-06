@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.17" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="LVB-YS-i5n">
     <dependencies>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.11"/>
     </dependencies>
     <scenes>
@@ -16,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICh-N5-GNI" customClass="JoystickView" customModule="Megaman" customModuleProvider="target">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ICh-N5-GNI" customClass="JoystickView" customModule="Megaman" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="381" width="480" height="99"/>
                                 <subviews>
                                     <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CUw-wp-4jR" userLabel="Right Button">
