@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Vector3D : Printable
+struct Vector3D : Printable, Equatable
 {
     var x : CGFloat = 0.0
     var y : CGFloat = 0.0
@@ -173,11 +173,6 @@ struct Vector3D : Printable
 @infix func == (left: Vector3D, right: Vector3D) -> Bool
 {
     return ( left.x == right.x ) && ( left.y == right.y ) && ( left.z == right.z )
-}
-
-@infix func != (left: Vector3D, right: Vector3D) -> Bool
-{
-    return !( left == right )
 }
 
 @infix func * (left: Vector3D, right: CGFloat) -> Vector3D
