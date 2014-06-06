@@ -71,8 +71,8 @@ class GameScene : SKScene
                 
                 let currentTouchPosition = touch.locationInNode(self)
                 
-                let touchVector = Vector3D(x: currentTouchPosition.x - startTouchPosition.x, y: currentTouchPosition.y - startTouchPosition.y, z: 0.0 )
-                let horVector = Vector3D(x: 1.0, y: 0.0, z: 0.0)
+                let touchVector = Vector3D(currentTouchPosition.x - startTouchPosition.x, currentTouchPosition.y - startTouchPosition.y, 0.0 )
+                let horVector = Vector3D(1.0, 0.0, 0.0)
                 let angle = horVector.angleBetween(touchVector)
                 
                 if ( angle < 45 ) || ( angle > 135 )

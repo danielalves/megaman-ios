@@ -19,7 +19,7 @@ struct Vector3D
         return sqrtf( x*x + y*y + z*z )
     }
     
-    init(x: CGFloat, y: CGFloat, z: CGFloat)
+    init(_ x: CGFloat, _ y: CGFloat, _ z: CGFloat)
     {
         self.x = x
         self.y = y
@@ -54,9 +54,9 @@ struct Vector3D
     
     func cross(other: Vector3D) -> Vector3D
     {
-        return Vector3D( x: y * other.z - z * other.y,
-                         y: z * other.x - x * other.z,
-                         z: x * other.y - y * other.x )
+        return Vector3D( y * other.z - z * other.y,
+                         z * other.x - x * other.z,
+                         x * other.y - y * other.x )
     }
     
     func angleBetween(other: Vector3D) -> CGFloat
@@ -95,17 +95,17 @@ struct Vector3D
 
 @infix func + (left: Vector3D, right: Vector3D) -> Vector3D
 {
-    return Vector3D( x: left.x + right.x, y: left.y + right.y, z: left.z + right.z )
+    return Vector3D( left.x + right.x, left.y + right.y, left.z + right.z )
 }
 
 @infix func - (left: Vector3D, right: Vector3D) -> Vector3D
 {
-    return Vector3D( x: left.x - right.x, y: left.y - right.y, z: left.z - right.z )
+    return Vector3D( left.x - right.x, left.y - right.y, left.z - right.z )
 }
 
 @prefix func - (vector: Vector3D) -> Vector3D
 {
-    return Vector3D( x: -vector.x, y: -vector.y, z: -vector.z )
+    return Vector3D( -vector.x, -vector.y, -vector.z )
 }
 
 @assignment func += (inout left: Vector3D, right: Vector3D)
@@ -120,7 +120,7 @@ struct Vector3D
 
 @prefix @assignment func ++ (inout vector: Vector3D) -> Vector3D
 {
-    vector += Vector3D(x: 1.0, y: 1.0, z: 1.0)
+    vector += Vector3D(1.0, 1.0, 1.0)
     return vector
 }
 
@@ -136,7 +136,7 @@ struct Vector3D
 
 @infix func * (left: Vector3D, right: CGFloat) -> Vector3D
 {
-    return Vector3D( x: left.x * right, y: left.y * right, z: left.z  * right )
+    return Vector3D( left.x * right, left.y * right, left.z  * right )
 }
 
 @infix func * (left: CGFloat, right: Vector3D) -> Vector3D
