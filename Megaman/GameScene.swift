@@ -27,6 +27,31 @@ class GameScene : SKScene
     
     override func didMoveToView( view: SKView )
     {
+        var path = NSBundle.mainBundle().pathForResource("test-stage", ofType: "json")
+        
+        var error : NSError?
+        var map = TLDMap.loadFromJsonAtPath( path, error: &error)
+        
+        if map {
+            let nodes = map!.toSpriteKitNodes()
+            for node in nodes {
+                
+//                if let tileNode = node.children[0] as? SKSpriteNode
+//                {
+//                    tileNode.removeFromParent()
+//                    
+//                    println(tileNode.size)
+//                    
+//                    addChild(tileNode)
+                
+                    addChild( node )
+                    node.position = CGPoint( x: frame.width / 2.0, y: frame.height / 2.0 )
+                    
+                    println( "Hidden: \(node.hidden), Size: \(node.frame)" )
+//                }
+            }
+        }
+
         addChild( megaman )
         
         megaman.position = CGPoint( x: frame.width / 2.0, y: frame.height / 2.0 )

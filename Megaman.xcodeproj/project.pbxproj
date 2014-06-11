@@ -10,6 +10,7 @@
 		123E42C01940B3BF00548C0E /* SKActionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123E42BF1940B3BF00548C0E /* SKActionExtensions.swift */; };
 		123E42C21940D85D00548C0E /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123E42C11940D85D00548C0E /* Shot.swift */; };
 		124CE5D6193F5CA800D7277A /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124CE5D5193F5CA800D7277A /* SKNodeExtensions.swift */; };
+		12711B12194741D80075A5B7 /* TLDBaseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12711B11194741D80075A5B7 /* TLDBaseTypes.swift */; };
 		12728317193E492E008DD12B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12728316193E492E008DD12B /* AppDelegate.swift */; };
 		12728319193E492E008DD12B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 12728318193E492E008DD12B /* GameScene.sks */; };
 		1272831B193E492E008DD12B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1272831A193E492E008DD12B /* GameScene.swift */; };
@@ -21,6 +22,12 @@
 		1272833A193E49CC008DD12B /* MegamanNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12728339193E49CC008DD12B /* MegamanNode.swift */; };
 		12D06CA5193FDDA9005C6BE8 /* Vector3D.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D06CA4193FDDA9005C6BE8 /* Vector3D.swift */; };
 		12D06CA8193FE2B8005C6BE8 /* NitroMath.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D06CA7193FE2B8005C6BE8 /* NitroMath.swift */; };
+		12E5E2D219462A5A00B26714 /* TLDMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E5E2D119462A5A00B26714 /* TLDMap.swift */; };
+		12E5E2D419462A6B00B26714 /* TLDLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E5E2D319462A6B00B26714 /* TLDLayer.swift */; };
+		12E5E2DA19462DDA00B26714 /* megaman-3-tileset.png in Resources */ = {isa = PBXBuildFile; fileRef = 12E5E2D619462DDA00B26714 /* megaman-3-tileset.png */; };
+		12E5E2DB19462DDA00B26714 /* test-stage.json in Resources */ = {isa = PBXBuildFile; fileRef = 12E5E2D819462DDA00B26714 /* test-stage.json */; };
+		12E5E2DC19462DDA00B26714 /* test-stage.tmx in Resources */ = {isa = PBXBuildFile; fileRef = 12E5E2D919462DDA00B26714 /* test-stage.tmx */; };
+		12E5E2EE194651E400B26714 /* TLDTileSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12E5E2ED194651E400B26714 /* TLDTileSet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,9 +62,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1239DD181948E53C005C708A /* megaman.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = megaman.playground; sourceTree = "<group>"; };
 		123E42BF1940B3BF00548C0E /* SKActionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActionExtensions.swift; sourceTree = "<group>"; };
 		123E42C11940D85D00548C0E /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
 		124CE5D5193F5CA800D7277A /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
+		12711B11194741D80075A5B7 /* TLDBaseTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLDBaseTypes.swift; sourceTree = "<group>"; };
 		12728311193E492E008DD12B /* Megaman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Megaman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12728315193E492E008DD12B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12728316193E492E008DD12B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +82,12 @@
 		12728339193E49CC008DD12B /* MegamanNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MegamanNode.swift; sourceTree = "<group>"; };
 		12D06CA4193FDDA9005C6BE8 /* Vector3D.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Vector3D.swift; sourceTree = "<group>"; };
 		12D06CA7193FE2B8005C6BE8 /* NitroMath.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NitroMath.swift; sourceTree = "<group>"; };
+		12E5E2D119462A5A00B26714 /* TLDMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLDMap.swift; sourceTree = "<group>"; };
+		12E5E2D319462A6B00B26714 /* TLDLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLDLayer.swift; sourceTree = "<group>"; };
+		12E5E2D619462DDA00B26714 /* megaman-3-tileset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "megaman-3-tileset.png"; sourceTree = "<group>"; };
+		12E5E2D819462DDA00B26714 /* test-stage.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-stage.json"; sourceTree = "<group>"; };
+		12E5E2D919462DDA00B26714 /* test-stage.tmx */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "test-stage.tmx"; sourceTree = "<group>"; };
+		12E5E2ED194651E400B26714 /* TLDTileSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLDTileSet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,11 +138,14 @@
 				12D06CA4193FDDA9005C6BE8 /* Vector3D.swift */,
 				123E42BF1940B3BF00548C0E /* SKActionExtensions.swift */,
 				124CE5D5193F5CA800D7277A /* SKNodeExtensions.swift */,
+				12E5E2D019462A1B00B26714 /* TiledKit */,
+				12E5E2D519462DDA00B26714 /* Resources */,
 				12728321193E492E008DD12B /* Images.xcassets */,
 				12728337193E495D008DD12B /* megaman.atlas */,
 				1272831E193E492E008DD12B /* Main.storyboard */,
 				12728318193E492E008DD12B /* GameScene.sks */,
 				12728314193E492E008DD12B /* Supporting Files */,
+				1239DD181948E53C005C708A /* megaman.playground */,
 			);
 			path = Megaman;
 			sourceTree = "<group>";
@@ -155,6 +173,35 @@
 				1272832C193E492E008DD12B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		12E5E2D019462A1B00B26714 /* TiledKit */ = {
+			isa = PBXGroup;
+			children = (
+				12711B11194741D80075A5B7 /* TLDBaseTypes.swift */,
+				12E5E2D119462A5A00B26714 /* TLDMap.swift */,
+				12E5E2D319462A6B00B26714 /* TLDLayer.swift */,
+				12E5E2ED194651E400B26714 /* TLDTileSet.swift */,
+			);
+			path = TiledKit;
+			sourceTree = "<group>";
+		};
+		12E5E2D519462DDA00B26714 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				12E5E2D619462DDA00B26714 /* megaman-3-tileset.png */,
+				12E5E2D719462DDA00B26714 /* Tilemaps */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		12E5E2D719462DDA00B26714 /* Tilemaps */ = {
+			isa = PBXGroup;
+			children = (
+				12E5E2D819462DDA00B26714 /* test-stage.json */,
+				12E5E2D919462DDA00B26714 /* test-stage.tmx */,
+			);
+			path = Tilemaps;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,9 +287,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				12E5E2DB19462DDA00B26714 /* test-stage.json in Resources */,
 				12728322193E492E008DD12B /* Images.xcassets in Resources */,
 				12728319193E492E008DD12B /* GameScene.sks in Resources */,
 				12728338193E495D008DD12B /* megaman.atlas in Resources */,
+				12E5E2DC19462DDA00B26714 /* test-stage.tmx in Resources */,
+				12E5E2DA19462DDA00B26714 /* megaman-3-tileset.png in Resources */,
 				12728320193E492E008DD12B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,11 +312,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				1272833A193E49CC008DD12B /* MegamanNode.swift in Sources */,
+				12E5E2EE194651E400B26714 /* TLDTileSet.swift in Sources */,
+				12E5E2D219462A5A00B26714 /* TLDMap.swift in Sources */,
+				12711B12194741D80075A5B7 /* TLDBaseTypes.swift in Sources */,
 				124CE5D6193F5CA800D7277A /* SKNodeExtensions.swift in Sources */,
 				12D06CA8193FE2B8005C6BE8 /* NitroMath.swift in Sources */,
 				1272831B193E492E008DD12B /* GameScene.swift in Sources */,
 				1272831D193E492E008DD12B /* GameViewController.swift in Sources */,
 				12D06CA5193FDDA9005C6BE8 /* Vector3D.swift in Sources */,
+				12E5E2D419462A6B00B26714 /* TLDLayer.swift in Sources */,
 				123E42C21940D85D00548C0E /* Shot.swift in Sources */,
 				12728317193E492E008DD12B /* AppDelegate.swift in Sources */,
 				123E42C01940B3BF00548C0E /* SKActionExtensions.swift in Sources */,

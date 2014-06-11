@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="20" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="megaman-3-tileset" tilewidth="16" tileheight="16">
+  <image source="../megaman-3-tileset.png" trans="ff00ff" width="640" height="64"/>
+ </tileset>
+ <layer name="Background" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztw0ENAAAMA6Grf9NzsRckrJqqqurDA5vdAyE=
+  </data>
+ </layer>
+ <layer name="Collision" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIJRMApGNuAAYkEo5hpgt2ADAjjY5AJk/+LCA+k+YswQIQGLU+g+9PASx6+cIkCK+2DuokaYEwvEGXCnGeS8w8FA23AiB0gw0CcORwFhAABOgAOa
+  </data>
+ </layer>
+ <layer name="Foreground" width="40" height="20">
+  <data encoding="base64" compression="zlib">
+   eJztwTEBAAAAwqD1T20LL6AAAAA+BgyAAAE=
+  </data>
+ </layer>
+</map>
