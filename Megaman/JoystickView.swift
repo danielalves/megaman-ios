@@ -20,6 +20,8 @@ protocol JoystickViewDelegate {
     func joystickDirectionalButtonDidTap(JoystickDirection)
     func joystickAButtonDidTap()
     func joystickBButtonDidTap()
+    func joystickStartMoving(JoystickDirection)
+    func joystickStopMoving()
 }
 
 class JoystickView: UIView {
@@ -28,11 +30,56 @@ class JoystickView: UIView {
     @IBOutlet var rightDirectionButton : UIButton
     @IBOutlet var leftDirectionButton : UIButton
     @IBOutlet var downDirectionButton : UIButton
+
+    @IBOutlet var analogStickAreaView : UIView
+    @IBOutlet var analogStickView : UIView
+
+    var analogStickInitialized = false
+
+    var startTouchPosition : CGPoint = CGPointZero
     
     var delegate : JoystickViewDelegate?
     
     init(coder aDecoder: NSCoder!) {
         return super.init(coder: aDecoder)
+    }
+
+    func initializeAnalogStick() {
+        analogStickAreaView.layer.borderColor = UIColor(white: 0.5, alpha: 0.8).CGColor
+        analogStickAreaView.layer.borderWidth = 2.0
+        analogStickAreaView.layer.cornerRadius = floorf(analogStickAreaView.frame.size.height / 2.0)
+
+        analogStickView.layer.borderColor = UIColor(white: 0.3, alpha: 0.8).CGColor
+        analogStickView.layer.borderWidth = 1.0
+        analogStickView.layer.cornerRadius = floorf(analogStickView.frame.size.height / 2.0)
+
+        analogStickView.layer.shadowColor = UIColor.blackColor().CGColor
+        analogStickView.layer.shadowRadius = 10.0
+        analogStickView.layer.shadowOffset = CGSizeMake(1, 1);
+
+        analogStickInitialized = true
+    }
+
+    func showAnalogStick() {
+        analogStickAreaView.hidden = false
+        analogStickAreaView.center = startTouchPosition
+        analogStickView.hidden = false
+        analogStickView.center = startTouchPosition
+    }
+
+    func moveAnalogStick(position: CGPoint) {
+        let radius = floorf(analogStickAreaView.frame.size.height / 2.0)
+        var analogStickRelativePositionVector = Vector3D(position.x - analogStickAreaView.center.x, position.y - analogStickAreaView.center.y, 0.0)
+
+        if analogStickRelativePositionVector.module <= radius {
+            analogStickView.center = position
+        } else {
+            analogStickRelativePositionVector.normalize()
+            let x = analogStickAreaView.center.x + analogStickRelativePositionVector.x * radius
+            let y = analogStickAreaView.center.y + analogStickRelativePositionVector.y * radius
+
+            analogStickView.center = CGPointMake(x, y)
+        }
     }
     
     @IBAction func directionButtonDidTap(sender : UIButton) {
@@ -60,5 +107,43 @@ class JoystickView: UIView {
     
     @IBAction func bButtonDidTap() {
         delegate?.joystickBButtonDidTap()
+    }
+
+    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
+        if !analogStickInitialized {
+            initializeAnalogStick()
+        }
+        let touch = touches.anyObject() as UITouch
+        startTouchPosition = touch.locationInView(self)
+        showAnalogStick()
+    }
+
+    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!) {
+        let touch = touches.anyObject() as UITouch
+        let currentTouchPosition = touch.locationInView(self)
+
+        moveAnalogStick(currentTouchPosition)
+
+        let touchVector = Vector3D(currentTouchPosition.x - startTouchPosition.x, currentTouchPosition.y - startTouchPosition.y, 0.0 )
+        switch touchVector.x {
+        case 0:
+            delegate?.joystickStopMoving()
+        case let x where x > 0:
+            delegate?.joystickStartMoving(.Right)
+        default:
+            delegate?.joystickStartMoving(.Left)
+        }
+    }
+
+    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+        analogStickAreaView.hidden = true
+        analogStickView.hidden = true
+        delegate?.joystickStopMoving()
+    }
+
+    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)  {
+        analogStickAreaView.hidden = true
+        analogStickView.hidden = true
+        delegate?.joystickStopMoving()
     }
 }

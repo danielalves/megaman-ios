@@ -24,6 +24,8 @@ class GameScene : SKScene, JoystickViewDelegate
     let megaman = MegamanNode()
     
     var startTouchPosition : CGPoint = CGPointZero
+
+    var currentDirection : JoystickDirection = .Unknown
     
     override func didMoveToView( view: SKView )
     {
@@ -48,6 +50,20 @@ class GameScene : SKScene, JoystickViewDelegate
             default:
                 return
         }
+    }
+
+    func joystickStartMoving(direction: JoystickDirection) {
+        if (direction != currentDirection) {
+            currentDirection = direction
+            var position = megaman.position
+            position.x = currentDirection == .Left ? 0.0 : frame.size.width;
+            megaman.moveTo(position);
+        }
+    }
+
+    func joystickStopMoving() {
+        currentDirection = .Unknown
+        megaman.still()
     }
     
     func joystickAButtonDidTap() {
