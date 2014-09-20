@@ -9,6 +9,10 @@
   </data>
  </layer>
  <layer name="Collision" width="40" height="20">
+  <properties>
+   <property name="collision" value="1"/>
+   <property name="player" value="1"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJxjYBgFo2AUjIJRMApGNuAAYkEo5hpgt2ADAjjY5AJk/+LCA+k+YswQIQGLU+g+9PASx6+cIkCK+2DuokaYEwvEGXCnGeS8w8FA23AiB0gw0CcORwFhAABOgAOa
   </data>

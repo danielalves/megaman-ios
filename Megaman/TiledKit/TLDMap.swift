@@ -187,16 +187,16 @@ class TLDMap : Printable
                         
                         let tileNode = SKSpriteNode(texture: croppedTexture)
                         layerNode.addChild( tileNode )
+                        
+                        if layer.collision {
+                            tileNode.physicsBody = SKPhysicsBody(edgeLoopFromRect: tileNode.frame)
+                        }
 
                         let x = ( UInt32(index) % layer.width ) * UInt32(mainTileSet.tileWidth)
                         let y = ( UInt32(index) / layer.width ) * UInt32(mainTileSet.tileHeight)
-                        
-                        
+
                         tileNode.position = CGPointMake( CGFloat(x) + tileImageRect.size.width / 2.0 ,
                                                          layerHeightInPixels - CGFloat(y) + tileImageRect.size.height / 2.0 )
-                        
-                        println( "Tile image rect \(tileImageRect)" )
-                        println( "Coordinates: [\(x), \(y)] - tile node pos: \(tileNode.position)" )
                     }
                 }
                 

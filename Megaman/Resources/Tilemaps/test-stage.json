@@ -16,6 +16,11 @@
          "height":20,
          "name":"Collision",
          "opacity":1,
+         "properties":
+            {
+             "collision":"1",
+             "player":"1"
+            },
          "type":"tilelayer",
          "visible":true,
          "width":40,

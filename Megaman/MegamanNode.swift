@@ -107,9 +107,13 @@ class MegamanNode : SKSpriteNode
         runningAndShootingAnimation = SKAction.animateWithTextures( runningAndShootingFrames, timePerFrame: 0.1 )
         
         let defaultFrame = stillFrames[0]
-        super.init( texture: defaultFrame, color: UIColor.whiteColor(), size: defaultFrame.size())
+        var defaultFrameSize = defaultFrame.size()
+        super.init( texture: defaultFrame, color: UIColor.whiteColor(), size: defaultFrameSize)
         
-        setScale(4.0)
+        // TODO
+//        var frameNode = SKShapeNode(rect:CGRectMake( 0.0, 0.0, defaultFrameSize.width, defaultFrameSize.height))
+//        frameNode.fillColor = UIColor.redColor()
+//        addChild(frameNode)
     }
 
     func moveTo( destination: CGPoint )

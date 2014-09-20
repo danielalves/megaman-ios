@@ -35,20 +35,10 @@ class GameScene : SKScene
         if map {
             let nodes = map!.toSpriteKitNodes()
             for node in nodes {
-                
-//                if let tileNode = node.children[0] as? SKSpriteNode
-//                {
-//                    tileNode.removeFromParent()
-//                    
-//                    println(tileNode.size)
-//                    
-//                    addChild(tileNode)
-                
-                    addChild( node )
-                    node.position = CGPoint( x: frame.width / 2.0, y: frame.height / 2.0 )
-                    
-                    println( "Hidden: \(node.hidden), Size: \(node.frame)" )
-//                }
+
+                addChild( node )
+                node.setScale( 4.0 )
+                node.position = CGPoint( x: frame.width / 2.0, y: frame.height / 2.0 )
             }
         }
 

@@ -26,14 +26,14 @@ class TLDTileSet : Printable
         case Properties = "properties"
     }
     
-    var name: String = ""
+    var name = ""
     
-    var imagePath: String = ""
+    var imagePath = ""
     var imageWidth: UInt32 = 0
     var imageHeight: UInt32 = 0
     var margin: UInt16 = 0
     var spacing: UInt16 = 0
-    var transparentColor: TLDColor = UIColor()
+    var transparentColor = TLDColor()
     
     var tileWidth: UInt16 = 0
     var tileHeight: UInt16 = 0

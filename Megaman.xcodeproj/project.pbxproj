@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		123E42C01940B3BF00548C0E /* SKActionExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123E42BF1940B3BF00548C0E /* SKActionExtensions.swift */; };
 		123E42C21940D85D00548C0E /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 123E42C11940D85D00548C0E /* Shot.swift */; };
+		12423C16194B49EB00B1A4FC /* TLDBaseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12423C15194B49EB00B1A4FC /* TLDBaseTypes.swift */; };
 		124CE5D6193F5CA800D7277A /* SKNodeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 124CE5D5193F5CA800D7277A /* SKNodeExtensions.swift */; };
-		12711B12194741D80075A5B7 /* TLDBaseTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12711B11194741D80075A5B7 /* TLDBaseTypes.swift */; };
 		12728317193E492E008DD12B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12728316193E492E008DD12B /* AppDelegate.swift */; };
 		12728319193E492E008DD12B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 12728318193E492E008DD12B /* GameScene.sks */; };
 		1272831B193E492E008DD12B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1272831A193E492E008DD12B /* GameScene.swift */; };
@@ -59,14 +59,28 @@
 			remoteGlobalIDString = 12728310193E492E008DD12B;
 			remoteInfo = Megaman;
 		};
+		129DA82E1952312C00192AE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12728309193E492E008DD12B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 12728310193E492E008DD12B;
+			remoteInfo = Megaman;
+		};
+		129DA8301952312C00192AE9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 12728309193E492E008DD12B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 12728310193E492E008DD12B;
+			remoteInfo = Megaman;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1239DD181948E53C005C708A /* megaman.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = megaman.playground; sourceTree = "<group>"; };
+		1234C1E1194B3B530052A33A /* megaman.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = megaman.playground; sourceTree = "<group>"; };
 		123E42BF1940B3BF00548C0E /* SKActionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKActionExtensions.swift; sourceTree = "<group>"; };
 		123E42C11940D85D00548C0E /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
+		12423C15194B49EB00B1A4FC /* TLDBaseTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLDBaseTypes.swift; sourceTree = "<group>"; };
 		124CE5D5193F5CA800D7277A /* SKNodeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKNodeExtensions.swift; sourceTree = "<group>"; };
-		12711B11194741D80075A5B7 /* TLDBaseTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TLDBaseTypes.swift; sourceTree = "<group>"; };
 		12728311193E492E008DD12B /* Megaman.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Megaman.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		12728315193E492E008DD12B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12728316193E492E008DD12B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -144,8 +158,8 @@
 				12728337193E495D008DD12B /* megaman.atlas */,
 				1272831E193E492E008DD12B /* Main.storyboard */,
 				12728318193E492E008DD12B /* GameScene.sks */,
+				1234C1E1194B3B530052A33A /* megaman.playground */,
 				12728314193E492E008DD12B /* Supporting Files */,
-				1239DD181948E53C005C708A /* megaman.playground */,
 			);
 			path = Megaman;
 			sourceTree = "<group>";
@@ -178,7 +192,7 @@
 		12E5E2D019462A1B00B26714 /* TiledKit */ = {
 			isa = PBXGroup;
 			children = (
-				12711B11194741D80075A5B7 /* TLDBaseTypes.swift */,
+				12423C15194B49EB00B1A4FC /* TLDBaseTypes.swift */,
 				12E5E2D119462A5A00B26714 /* TLDMap.swift */,
 				12E5E2D319462A6B00B26714 /* TLDLayer.swift */,
 				12E5E2ED194651E400B26714 /* TLDTileSet.swift */,
@@ -239,6 +253,8 @@
 				1236BC10193E53FC0056612B /* PBXTargetDependency */,
 				124CE5D8193F6B5000D7277A /* PBXTargetDependency */,
 				124CE5DA193F6B5000D7277A /* PBXTargetDependency */,
+				129DA82F1952312C00192AE9 /* PBXTargetDependency */,
+				129DA8311952312C00192AE9 /* PBXTargetDependency */,
 			);
 			name = MegamanTests;
 			productName = MegamanTests;
@@ -314,7 +330,7 @@
 				1272833A193E49CC008DD12B /* MegamanNode.swift in Sources */,
 				12E5E2EE194651E400B26714 /* TLDTileSet.swift in Sources */,
 				12E5E2D219462A5A00B26714 /* TLDMap.swift in Sources */,
-				12711B12194741D80075A5B7 /* TLDBaseTypes.swift in Sources */,
+				12423C16194B49EB00B1A4FC /* TLDBaseTypes.swift in Sources */,
 				124CE5D6193F5CA800D7277A /* SKNodeExtensions.swift in Sources */,
 				12D06CA8193FE2B8005C6BE8 /* NitroMath.swift in Sources */,
 				1272831B193E492E008DD12B /* GameScene.swift in Sources */,
@@ -357,6 +373,16 @@
 			isa = PBXTargetDependency;
 			target = 12728310193E492E008DD12B /* Megaman */;
 			targetProxy = 12728328193E492E008DD12B /* PBXContainerItemProxy */;
+		};
+		129DA82F1952312C00192AE9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 12728310193E492E008DD12B /* Megaman */;
+			targetProxy = 129DA82E1952312C00192AE9 /* PBXContainerItemProxy */;
+		};
+		129DA8311952312C00192AE9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 12728310193E492E008DD12B /* Megaman */;
+			targetProxy = 129DA8301952312C00192AE9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
