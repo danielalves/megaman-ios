@@ -24,7 +24,7 @@ class GameScene : SKScene, JoystickViewDelegate
     let megaman = MegamanNode()
     
     var startTouchPosition : CGPoint = CGPointZero
-
+    
     var currentDirection : JoystickDirection = .Unknown
     
     override func didMoveToView( view: SKView )
@@ -38,20 +38,20 @@ class GameScene : SKScene, JoystickViewDelegate
     override func update(currentTime: CFTimeInterval)
     {
     }
-
-	func joystickDirectionalButtonDidTap(direction: JoystickDirection) {
+    
+    func joystickDirectionalButtonDidTap(direction: JoystickDirection) {
         println("-> \(direction.hashValue)")
         
         switch direction {
-            case .Left:
-                megaman.moveLeft()
-            case .Right:
-                megaman.moveRight()
-            default:
-                return
+        case .Left:
+            megaman.moveLeft()
+        case .Right:
+            megaman.moveRight()
+        default:
+            return
         }
     }
-
+    
     func joystickStartMoving(direction: JoystickDirection) {
         if (direction != currentDirection) {
             currentDirection = direction
@@ -60,51 +60,54 @@ class GameScene : SKScene, JoystickViewDelegate
             megaman.moveTo(position);
         }
     }
-
+    
     func joystickStopMoving() {
         currentDirection = .Unknown
         megaman.still()
     }
     
     func joystickAButtonDidTap() {
-//        megaman.shoot()
+        //        megaman.shoot()
     }
     
     func joystickBButtonDidTap()  {
         megaman.jump()
     }
     
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
     {
-        let touch = touches.anyObject() as UITouch
+        let touch =  touches.first as! UITouch
         startTouchPosition = touch.locationInNode(self)
     }
     
-    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent)
     {
     }
     
-    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent)
     {
-        for touch in ( touches.allObjects as UITouch[] )
+        let touch =  touches.first as! UITouch
+        
+        for touch in ( touches  )
         {
-            if touch.tapCount > 0
+            if touches.count > 0
             {
-                switch touch.tapCount
+                switch touches.count
                 {
-                    case 1:
-                        handleSingleTap(touch)
-                    case 2:
-                        handleDoubleTap(touch)
-                    case 3:
-                        handleTripleTap(touch)
-                    default:
-                        handleMultipleTap(touch, tapCount: touch.tapCount)
+                case 1:
+                    handleSingleTap(touch as! UITouch)
+                case 2:
+                    handleDoubleTap(touch as! UITouch)
+                case 3:
+                    handleTripleTap(touch as! UITouch)
+                default:
+                    handleMultipleTap(touch as! UITouch, tapCount: touches.count)
                 }
             }
             else
             {
                 // TODO : Differentiate between swipe and panning
+                let touch =  touches.first as! UITouch
                 
                 let currentTouchPosition = touch.locationInNode(self)
                 
@@ -126,9 +129,9 @@ class GameScene : SKScene, JoystickViewDelegate
         }
     }
     
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!)
+    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent!)
     {
-         startTouchPosition = CGPointZero
+        startTouchPosition = CGPointZero
     }
     
     func handleSingleTap(touch: UITouch!)

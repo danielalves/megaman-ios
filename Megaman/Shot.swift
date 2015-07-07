@@ -26,6 +26,10 @@ class Shot : SKSpriteNode
         super.init(texture: tex, color: UIColor.whiteColor(), size: tex.size())
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func removeFromParent()
     {
         onKillCallback( self )
@@ -35,13 +39,13 @@ class Shot : SKSpriteNode
     func animate(direction: Direction, ownerDxPerSec: CGFloat)
     {
         let updateInterval: NSTimeInterval = 0.05
-        let dx = CGFloat( CGFloat(direction.toRaw()) * ( 20.0 + ( ownerDxPerSec * CGFloat(updateInterval) )))
+        let dx = CGFloat( CGFloat(direction.rawValue) * ( 20.0 + ( ownerDxPerSec * CGFloat(updateInterval) )))
         
-        let movementAction = SKAction.moveBy(CGVector( dx, 0.0 ),
-                                             duration: updateInterval )
+        let movementAction = SKAction.moveBy(CGVector( dx: dx, dy: 0.0 ),
+            duration: updateInterval )
         
         let checkEndedAction = SKAction.runBlock({
-            if( !self.scene.intersectsNode( self ) )
+            if( !self.scene!.intersectsNode( self ) )
             {
                 self.removeAllActions()
                 self.removeFromParent()
