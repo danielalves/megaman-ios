@@ -25,59 +25,55 @@ protocol JoystickViewDelegate {
 }
 
 class JoystickView: UIView {
-
-    @IBOutlet var upDirectionButton : UIButton
-    @IBOutlet var rightDirectionButton : UIButton
-    @IBOutlet var leftDirectionButton : UIButton
-    @IBOutlet var downDirectionButton : UIButton
-
-    @IBOutlet var analogStickAreaView : UIView
-    @IBOutlet var analogStickView : UIView
-
+    
+    @IBOutlet var upDirectionButton : UIButton!
+    @IBOutlet var rightDirectionButton : UIButton!
+    @IBOutlet var leftDirectionButton : UIButton!
+    @IBOutlet var downDirectionButton : UIButton!
+    
+    @IBOutlet var analogStickAreaView : UIView!
+    @IBOutlet var analogStickView : UIView!
+    
     var analogStickInitialized = false
-
+    
     var startTouchPosition : CGPoint = CGPointZero
     
     var delegate : JoystickViewDelegate?
     
-    init(coder aDecoder: NSCoder!) {
-        return super.init(coder: aDecoder)
-    }
-
     func initializeAnalogStick() {
         analogStickAreaView.layer.borderColor = UIColor(white: 0.5, alpha: 0.8).CGColor
         analogStickAreaView.layer.borderWidth = 2.0
-        analogStickAreaView.layer.cornerRadius = floorf(analogStickAreaView.frame.size.height / 2.0)
-
+        analogStickAreaView.layer.cornerRadius = CGFloat(floorf(Float(analogStickAreaView.frame.size.height / 2.0)))
+        
         analogStickView.layer.borderColor = UIColor(white: 0.3, alpha: 0.8).CGColor
         analogStickView.layer.borderWidth = 1.0
-        analogStickView.layer.cornerRadius = floorf(analogStickView.frame.size.height / 2.0)
-
+        analogStickView.layer.cornerRadius = CGFloat(floorf(Float(analogStickView.frame.size.height / 2.0)))
+        
         analogStickView.layer.shadowColor = UIColor.blackColor().CGColor
         analogStickView.layer.shadowRadius = 10.0
         analogStickView.layer.shadowOffset = CGSizeMake(1, 1);
-
+        
         analogStickInitialized = true
     }
-
+    
     func showAnalogStick() {
         analogStickAreaView.hidden = false
         analogStickAreaView.center = startTouchPosition
         analogStickView.hidden = false
         analogStickView.center = startTouchPosition
     }
-
+    
     func moveAnalogStick(position: CGPoint) {
-        let radius = floorf(analogStickAreaView.frame.size.height / 2.0)
+        let radius = CGFloat(floorf(Float(analogStickAreaView.frame.size.height / 2.0)))
         var analogStickRelativePositionVector = Vector3D(position.x - analogStickAreaView.center.x, position.y - analogStickAreaView.center.y, 0.0)
-
+        
         if analogStickRelativePositionVector.module <= radius {
             analogStickView.center = position
         } else {
             analogStickRelativePositionVector.normalize()
             let x = analogStickAreaView.center.x + analogStickRelativePositionVector.x * radius
             let y = analogStickAreaView.center.y + analogStickRelativePositionVector.y * radius
-
+            
             analogStickView.center = CGPointMake(x, y)
         }
     }
@@ -86,16 +82,16 @@ class JoystickView: UIView {
         var direction : JoystickDirection
         
         switch sender {
-            case upDirectionButton:
-                direction = .Up
-            case rightDirectionButton:
-                direction = .Right
-            case downDirectionButton:
-                direction = .Down
-            case leftDirectionButton:
-                direction = .Left
-            default:
-                direction = .Unknown
+        case upDirectionButton:
+            direction = .Up
+        case rightDirectionButton:
+            direction = .Right
+        case downDirectionButton:
+            direction = .Down
+        case leftDirectionButton:
+            direction = .Left
+        default:
+            direction = .Unknown
         }
         
         delegate?.joystickDirectionalButtonDidTap(direction)
@@ -108,22 +104,22 @@ class JoystickView: UIView {
     @IBAction func bButtonDidTap() {
         delegate?.joystickBButtonDidTap()
     }
-
-    override func touchesBegan(touches: NSSet!, withEvent event: UIEvent!) {
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch =  touches.first as! UITouch
+        startTouchPosition = touch.locationInView(self)
         if !analogStickInitialized {
             initializeAnalogStick()
         }
-        let touch = touches.anyObject() as UITouch
-        startTouchPosition = touch.locationInView(self)
         showAnalogStick()
     }
-
-    override func touchesMoved(touches: NSSet!, withEvent event: UIEvent!) {
-        let touch = touches.anyObject() as UITouch
+    
+    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
+        let touch =  touches.first as! UITouch
         let currentTouchPosition = touch.locationInView(self)
-
+        
         moveAnalogStick(currentTouchPosition)
-
+        
         let touchVector = Vector3D(currentTouchPosition.x - startTouchPosition.x, currentTouchPosition.y - startTouchPosition.y, 0.0 )
         switch touchVector.x {
         case 0:
@@ -134,14 +130,14 @@ class JoystickView: UIView {
             delegate?.joystickStartMoving(.Left)
         }
     }
-
-    override func touchesCancelled(touches: NSSet!, withEvent event: UIEvent!) {
+    
+    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent!) {
         analogStickAreaView.hidden = true
         analogStickView.hidden = true
         delegate?.joystickStopMoving()
     }
-
-    override func touchesEnded(touches: NSSet!, withEvent event: UIEvent!)  {
+    
+    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent)  {
         analogStickAreaView.hidden = true
         analogStickView.hidden = true
         delegate?.joystickStopMoving()

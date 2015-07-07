@@ -15,8 +15,8 @@ struct Vector3D : Printable, Equatable
     var z : CGFloat = 0.0
     
     var module : CGFloat
-    {
-        return sqrtf( x*x + y*y + z*z )
+        {
+            return CGFloat(sqrtf( CFloat(x*x + y*y + z*z) ))
     }
     
     init(_ x: CGFloat, _ y: CGFloat, _ z: CGFloat)
@@ -55,19 +55,19 @@ struct Vector3D : Printable, Equatable
     func cross(other: Vector3D) -> Vector3D
     {
         return Vector3D( y * other.z - z * other.y,
-                         z * other.x - x * other.z,
-                         x * other.y - y * other.x )
+            z * other.x - x * other.z,
+            x * other.y - y * other.x )
     }
     
     func angleBetween(other: Vector3D) -> CGFloat
     {
-        return radiansToDegrees( acosf( normalized().dot( other.normalized() ) ) )
+        return CGFloat(radiansToDegrees( CFloat(acosf(CFloat( normalized().dot( other.normalized()))))))
     }
     
     mutating func normalize() -> Vector3D
     {
         let m = module
-        if fdif( m, 0.0 )
+        if fdif( CFloat(m), CFloat(0.0))
         {
             x /= m
             y /= m
@@ -93,106 +93,106 @@ struct Vector3D : Printable, Equatable
     }
     
     subscript(index: Int) -> CGFloat
-    {
+        {
         get
         {
             assert( index >= 0 && index < 3, "index must be positive and less than 3" )
             
             switch index
             {
-                case 0:
-                    return x
-                case 1:
-                    return y
-                case 2:
-                    return z
+            case 0:
+                return x
+            case 1:
+                return y
+            case 2:
+                return z
                 
                 // Will never run: assert is protecting us
-                default:
-                    return CGFloat.NaN;
+            default:
+                return CGFloat.NaN;
             }
         }
-
+        
         set(newValue)
         {
             assert( index >= 0 && index < 3, "index must be positive and less than 3" )
             
             switch index
             {
-                case 0:
-                    x = newValue
-                case 1:
-                    y = newValue
-                case 2:
-                    z = newValue
+            case 0:
+                x = newValue
+            case 1:
+                y = newValue
+            case 2:
+                z = newValue
                 
                 // Will never run: assert is protecting us
-                default:
-                    return;
+            default:
+                return;
             }
         }
     }
     
     var description: String
-    {
-        return "x: \(x), y: \(y), z: \(z)"
+        {
+            return "x: \(x), y: \(y), z: \(z)"
     }
 }
 
-@infix func + (left: Vector3D, right: Vector3D) -> Vector3D
+func + (left: Vector3D, right: Vector3D) -> Vector3D
 {
     return Vector3D( left.x + right.x, left.y + right.y, left.z + right.z )
 }
 
-@infix func - (left: Vector3D, right: Vector3D) -> Vector3D
+func - (left: Vector3D, right: Vector3D) -> Vector3D
 {
     return Vector3D( left.x - right.x, left.y - right.y, left.z - right.z )
 }
 
-@prefix func - (vector: Vector3D) -> Vector3D
+prefix func - (vector: Vector3D) -> Vector3D
 {
     return Vector3D( -vector.x, -vector.y, -vector.z )
 }
 
-@assignment func += (inout left: Vector3D, right: Vector3D)
+func += (inout left: Vector3D, right: Vector3D)
 {
     left = left + right
 }
 
-@assignment func -= (inout left: Vector3D, right: Vector3D)
+func -= (inout left: Vector3D, right: Vector3D)
 {
     left = left - right
 }
 
-@prefix @assignment func ++ (inout vector: Vector3D) -> Vector3D
+prefix func ++ (inout vector: Vector3D) -> Vector3D
 {
     vector += Vector3D(1.0, 1.0, 1.0)
     return vector
 }
 
-@infix func == (left: Vector3D, right: Vector3D) -> Bool
+func == (left: Vector3D, right: Vector3D) -> Bool
 {
     return ( left.x == right.x ) && ( left.y == right.y ) && ( left.z == right.z )
 }
 
-@infix func * (left: Vector3D, right: CGFloat) -> Vector3D
+func * (left: Vector3D, right: CGFloat) -> Vector3D
 {
     return Vector3D( left.x * right, left.y * right, left.z  * right )
 }
 
-@infix func * (left: CGFloat, right: Vector3D) -> Vector3D
+func * (left: CGFloat, right: Vector3D) -> Vector3D
 {
     return right * left
 }
 
-@infix func * (left: Vector3D, right: Vector3D) -> CGFloat
+func * (left: Vector3D, right: Vector3D) -> CGFloat
 {
     return left.dot( right )
 }
 
-operator infix ** {}
+infix operator ** {}
 
-@infix func ** (left: Vector3D, right: Vector3D) -> Vector3D
+func ** (left: Vector3D, right: Vector3D) -> Vector3D
 {
     return left.cross( right )
 }
