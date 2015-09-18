@@ -173,7 +173,7 @@ func fcmp_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Int8 { return fabsf( f
 *
 *  @see fcmp_e, feql_e, feql, fdif_e, fdif, fltn_e, fltn, fgtn_e, fgtn, fleq_e, fleq, fgeq_e, fgeq
 */
-func fcmp( f1: CFloat, f2: CFloat ) -> Int8 { return fcmp_e( f1, f2, FLT_EPSILON ) }
+func fcmp( f1: CFloat, f2: CFloat ) -> Int8 { return fcmp_e( f1, f2: f2, epsilon: FLT_EPSILON ) }
 
 /**
 *  Returns if f1 is equal to f2. The numbers are considered different only if
@@ -181,7 +181,7 @@ func fcmp( f1: CFloat, f2: CFloat ) -> Int8 { return fcmp_e( f1, f2, FLT_EPSILON
 *
 *  @see fcmp_e, fcmp, feql, fdif_e, fdif, fltn_e, fltn, fgtn_e, fgtn, fleq_e, fleq, fgeq_e, fgeq
 */
-func feql_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2, epsilon ) == 0 }
+func feql_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2: f2, epsilon: epsilon ) == 0 }
 
 /**
 *  Returns if f1 is equal to f2. The numbers are considered different only if
@@ -189,7 +189,7 @@ func feql_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( 
 *
 *  @see fcmp_e, fcmp, feql_e, fdif_e, fdif, fltn_e, fltn, fgtn_e, fgtn, fleq_e, fleq, fgeq_e, fgeq
 */
-func feql( f1: CFloat, f2: CFloat ) -> Bool { return feql_e( f1, f2, FLT_EPSILON ) }
+func feql( f1: CFloat, f2: CFloat ) -> Bool { return feql_e( f1, f2: f2, epsilon: FLT_EPSILON ) }
 
 /**
 *  Returns if f1 is different from f2. The numbers are considered different only if
@@ -197,7 +197,7 @@ func feql( f1: CFloat, f2: CFloat ) -> Bool { return feql_e( f1, f2, FLT_EPSILON
 *
 *  @see fcmp_e, fcmp, feql_e, feql, fdif, fltn_e, fltn, fgtn_e, fgtn, fleq_e, fleq, fgeq_e, fgeq
 */
-func fdif_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2, epsilon ) != 0 }
+func fdif_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2: f2, epsilon: epsilon ) != 0 }
 
 /**
 *  Returns if f1 is different from f2. The numbers are considered different only if
@@ -205,7 +205,7 @@ func fdif_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( 
 *
 *  @see fcmp_e, fcmp, feql_e, feql, fdif_e, fltn_e, fltn, fgtn_e, fgtn, fleq_e, fleq, fgeq_e, fgeq
 */
-func fdif( f1: CFloat, f2: CFloat ) -> Bool { return fdif_e( f1, f2, FLT_EPSILON ) }
+func fdif( f1: CFloat, f2: CFloat ) -> Bool { return fdif_e( f1, f2: f2, epsilon: FLT_EPSILON ) }
 
 /**
 *  Returns if f1 is lesser than f2. The numbers are considered different only if
@@ -213,7 +213,7 @@ func fdif( f1: CFloat, f2: CFloat ) -> Bool { return fdif_e( f1, f2, FLT_EPSILON
 *
 *  @see fcmp_e, fcmp, feql_e, feql, fdif_e, fdif, fltn, fgtn_e, fgtn, fleq_e, fleq, fgeq_e, fgeq
 */
-func fltn_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2, epsilon ) == -1 }
+func fltn_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2: f2, epsilon: epsilon ) == -1 }
 
 /**
 *  Returns if f1 is lesser than f2. The numbers are considered different only if
@@ -221,7 +221,7 @@ func fltn_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( 
 *
 *  @see fcmp_e, fcmp, feql_e, feql, fdif_e, fdif, fltn_e, fgtn_e, fgtn, fleq_e, fleq, fgeq_e, fgeq
 */
-func fltn( f1: CFloat, f2: CFloat ) -> Bool { return fltn_e( f1, f2, FLT_EPSILON ) }
+func fltn( f1: CFloat, f2: CFloat ) -> Bool { return fltn_e( f1, f2: f2, epsilon: FLT_EPSILON ) }
 
 /**
 *  Returns if f1 is greater than f2. The numbers are considered different only if
@@ -229,7 +229,7 @@ func fltn( f1: CFloat, f2: CFloat ) -> Bool { return fltn_e( f1, f2, FLT_EPSILON
 *
 *  @see fcmp_e, fcmp, feql_e, feql, fdif_e, fdif, fltn_e, fltn, fgtn, fleq_e, fleq, fgeq_e, fgeq
 */
-func fgtn_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2, epsilon ) == 1 }
+func fgtn_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2: f2, epsilon: epsilon ) == 1 }
 
 /**
 *  Returns if f1 is greater than f2. The numbers are considered different only if
@@ -237,7 +237,7 @@ func fgtn_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( 
 *
 *  @see fcmp_e, fcmp, feql_e, feql, fdif_e, fdif, fltn_e, fltn, fgtn_e, fleq_e, fleq, fgeq_e, fgeq
 */
-func fgtn( f1: CFloat, f2: CFloat ) -> Bool { return fgtn_e( f1, f2, FLT_EPSILON ) }
+func fgtn( f1: CFloat, f2: CFloat ) -> Bool { return fgtn_e( f1, f2: f2, epsilon: FLT_EPSILON ) }
 
 /**
 *  Returns if f1 is lesser or equal to f2. The numbers are considered different only if
@@ -245,7 +245,7 @@ func fgtn( f1: CFloat, f2: CFloat ) -> Bool { return fgtn_e( f1, f2, FLT_EPSILON
 *
 *  @see fcmp_e, fcmp, feql_e, feql, fdif_e, fdif, fltn_e, fltn, fgtn_e, fgtn, fleq, fgeq_e, fgeq
 */
-func fleq_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2, epsilon ) <= 0 }
+func fleq_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2: f2, epsilon: epsilon ) <= 0 }
 
 /**
 *  Returns if f1 is lesser or equal to f2. The numbers are considered different only if
@@ -253,7 +253,7 @@ func fleq_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( 
 *
 *  @see fcmp_e, fcmp, feql_e, feql, fdif_e, fdif, fltn_e, fltn, fgtn_e, fgtn, fleq_e, fgeq_e, fgeq
 */
-func fleq( f1: CFloat, f2: CFloat ) -> Bool { return fleq_e( f1, f2, FLT_EPSILON ) }
+func fleq( f1: CFloat, f2: CFloat ) -> Bool { return fleq_e( f1, f2: f2, epsilon: FLT_EPSILON ) }
 
 /**
 *  Returns if f1 is greater or equal to f2. The numbers are considered different only if
@@ -261,7 +261,7 @@ func fleq( f1: CFloat, f2: CFloat ) -> Bool { return fleq_e( f1, f2, FLT_EPSILON
 *
 *  @see fcmp_e, fcmp, feql_e, feql, fdif_e, fdif, fltn_e, fltn, fgtn_e, fgtn, fleq_e, fleq, fgeq_e, fgeq
 */
-func fgeq_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2, epsilon ) >= 0 }
+func fgeq_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( f1, f2: f2, epsilon: epsilon ) >= 0 }
 
 /**
 *  Returns if f1 is greater or equal to f2. The numbers are considered different only if
@@ -269,4 +269,4 @@ func fgeq_e( f1: CFloat, f2: CFloat, epsilon: CFloat ) -> Bool { return fcmp_e( 
 *
 *  @see fcmp_e, fcmp, feql_e, feql, fdif_e, fdif, fltn_e, fltn, fgtn_e, fgtn, fleq_e, fleq, fgeq_e
 */
-func fgeq( f1: CFloat, f2: CFloat ) -> Bool { return fgeq_e( f1, f2, FLT_EPSILON ) }
+func fgeq( f1: CFloat, f2: CFloat ) -> Bool { return fgeq_e( f1, f2: f2, epsilon: FLT_EPSILON ) }

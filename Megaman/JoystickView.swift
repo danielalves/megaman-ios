@@ -17,10 +17,10 @@ enum JoystickDirection {
 }
 
 protocol JoystickViewDelegate {
-    func joystickDirectionalButtonDidTap(JoystickDirection)
+    func joystickDirectionalButtonDidTap(_: JoystickDirection)
     func joystickAButtonDidTap()
     func joystickBButtonDidTap()
-    func joystickStartMoving(JoystickDirection)
+    func joystickStartMoving(_: JoystickDirection)
     func joystickStopMoving()
 }
 
@@ -105,39 +105,41 @@ class JoystickView: UIView {
         delegate?.joystickBButtonDidTap()
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch =  touches.first as! UITouch
-        startTouchPosition = touch.locationInView(self)
-        if !analogStickInitialized {
-            initializeAnalogStick()
-        }
-        showAnalogStick()
-    }
-    
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent) {
-        let touch =  touches.first as! UITouch
-        let currentTouchPosition = touch.locationInView(self)
-        
-        moveAnalogStick(currentTouchPosition)
-        
-        let touchVector = Vector3D(currentTouchPosition.x - startTouchPosition.x, currentTouchPosition.y - startTouchPosition.y, 0.0 )
-        switch touchVector.x {
-        case 0:
-            delegate?.joystickStopMoving()
-        case let x where x > 0:
-            delegate?.joystickStartMoving(.Right)
-        default:
-            delegate?.joystickStartMoving(.Left)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            startTouchPosition = touch.locationInView(self)
+            if !analogStickInitialized {
+                initializeAnalogStick()
+            }
+            showAnalogStick()
         }
     }
     
-    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent!) {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch =  touches.first {
+            let currentTouchPosition = touch.locationInView(self)
+            
+            moveAnalogStick(currentTouchPosition)
+            
+            let touchVector = Vector3D(currentTouchPosition.x - startTouchPosition.x, currentTouchPosition.y - startTouchPosition.y, 0.0 )
+            switch touchVector.x {
+            case 0:
+                delegate?.joystickStopMoving()
+            case let x where x > 0:
+                delegate?.joystickStartMoving(.Right)
+            default:
+                delegate?.joystickStartMoving(.Left)
+            }
+        }
+    }
+    
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?) {
         analogStickAreaView.hidden = true
         analogStickView.hidden = true
         delegate?.joystickStopMoving()
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent)  {
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?)  {
         analogStickAreaView.hidden = true
         analogStickView.hidden = true
         delegate?.joystickStopMoving()

@@ -40,7 +40,7 @@ class GameScene : SKScene, JoystickViewDelegate
     }
     
     func joystickDirectionalButtonDidTap(direction: JoystickDirection) {
-        println("-> \(direction.hashValue)")
+        print("-> \(direction.hashValue)")
         
         switch direction {
         case .Left:
@@ -74,62 +74,58 @@ class GameScene : SKScene, JoystickViewDelegate
         megaman.jump()
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent)
-    {
-        let touch =  touches.first as! UITouch
-        startTouchPosition = touch.locationInNode(self)
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if let touch = touches.first {
+            startTouchPosition = touch.locationInNode(self)
+        }
     }
     
-    override func touchesMoved(touches: Set<NSObject>, withEvent event: UIEvent)
-    {
+    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
     }
     
-    override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent)
-    {
-        let touch =  touches.first as! UITouch
-        
-        for touch in ( touches  )
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        for touch in touches
         {
             if touches.count > 0
             {
                 switch touches.count
                 {
                 case 1:
-                    handleSingleTap(touch as! UITouch)
+                    handleSingleTap(touch)
                 case 2:
-                    handleDoubleTap(touch as! UITouch)
+                    handleDoubleTap(touch)
                 case 3:
-                    handleTripleTap(touch as! UITouch)
+                    handleTripleTap(touch)
                 default:
-                    handleMultipleTap(touch as! UITouch, tapCount: touches.count)
+                    handleMultipleTap(touch, tapCount: touches.count)
                 }
             }
             else
             {
                 // TODO : Differentiate between swipe and panning
-                let touch =  touches.first as! UITouch
-                
-                let currentTouchPosition = touch.locationInNode(self)
-                
-                let touchVector = Vector3D(currentTouchPosition.x - startTouchPosition.x, currentTouchPosition.y - startTouchPosition.y, 0.0 )
-                let horVector = Vector3D(1.0, 0.0, 0.0)
-                let angle = horVector.angleBetween(touchVector)
-                
-                if ( angle < 45 ) || ( angle > 135 )
-                {
-                    handleHorizontalSwipe( touch, direction: startTouchPosition.x < currentTouchPosition.x ? .Left : .Right )
+                if let touch = touches.first {
+                    let currentTouchPosition = touch.locationInNode(self)
+                    
+                    let touchVector = Vector3D(currentTouchPosition.x - startTouchPosition.x, currentTouchPosition.y - startTouchPosition.y, 0.0 )
+                    let horVector = Vector3D(1.0, 0.0, 0.0)
+                    let angle = horVector.angleBetween(touchVector)
+                    
+                    if ( angle < 45 ) || ( angle > 135 )
+                    {
+                        handleHorizontalSwipe( touch, direction: startTouchPosition.x < currentTouchPosition.x ? .Left : .Right )
+                    }
+                    else
+                    {
+                        handleVerticalSwipe( touch, direction: startTouchPosition.y < currentTouchPosition.y ? .Up : .Down )
+                    }
+                    
+                    startTouchPosition = CGPointZero
                 }
-                else
-                {
-                    handleVerticalSwipe( touch, direction: startTouchPosition.y < currentTouchPosition.y ? .Up : .Down )
-                }
-                
-                startTouchPosition = CGPointZero
             }
         }
     }
     
-    override func touchesCancelled(touches: Set<NSObject>, withEvent event: UIEvent!)
+    override func touchesCancelled(touches: Set<UITouch>?, withEvent event: UIEvent?)
     {
         startTouchPosition = CGPointZero
     }

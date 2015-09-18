@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct Vector3D : Printable, Equatable
+struct Vector3D : CustomStringConvertible, Equatable
 {
     var x : CGFloat = 0.0
     var y : CGFloat = 0.0
@@ -67,7 +67,7 @@ struct Vector3D : Printable, Equatable
     mutating func normalize() -> Vector3D
     {
         let m = module
-        if fdif( CFloat(m), CFloat(0.0))
+        if fdif( CFloat(m), f2: CFloat(0.0))
         {
             x /= m
             y /= m
